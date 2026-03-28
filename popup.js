@@ -652,14 +652,16 @@ function initMoodStatus() {
         chip.style.background = MOOD_COLORS_POPUP[res.mood] || '#d1d5db';
       }
       if (res.lastCheck) {
+        let timer;
         const tick = () => {
           const remaining = Math.max(0, POLL_INTERVAL_MS - (Date.now() - res.lastCheck));
           const m = Math.floor(remaining / 60000);
           const s = Math.floor((remaining % 60000) / 1000);
           countdown.textContent = `${m}:${String(s).padStart(2, '0')}`;
+          if (remaining === 0) clearInterval(timer);
         };
         tick();
-        setInterval(tick, 1000);
+        timer = setInterval(tick, 1000);
       }
     });
   });
@@ -673,7 +675,7 @@ function inheritVerseUrl(inputEl) {
   _api.tabs.query({ active: true, currentWindow: true }, ([tab]) => {
     if (!tab) return;
     _api.tabs.sendMessage(tab.id, { type: 'GET_SHARED_VERSE_URL' }, res => {
-      if (chrome.runtime.lastError) return; // content script not ready
+      if (_api.runtime.lastError) return; // content script not ready
       if (res?.url && !inputEl.value) inputEl.value = res.url;
     });
   });

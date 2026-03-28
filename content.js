@@ -34,13 +34,53 @@ if (window.__hdjLoaded) {
   // ── DEFAULT PLAYLISTS ──────────────────────────────────────────────────
   // Spotify's own curated playlists — users can override any of these in settings
 
-  const DEFAULT_PLAYLISTS = {
-    zen:       'spotify:playlist:37i9dQZF1DX4sWSpwq3LiO', // Peaceful Piano
-    flowing:   'spotify:playlist:37i9dQZF1DXdeuECEhM6lW', // Chill Hits
-    focused:   'spotify:playlist:37i9dQZF1DWZeKCadgRdKQ', // Deep Focus
-    charged:   'spotify:playlist:37i9dQZF1DXdPec7aLTmlC', // Mood Booster
-    emergency: 'spotify:playlist:37i9dQZF1DX76Wlfdnj7AP'  // Beast Mode
+  // ── SERVICE PLAYLIST DEFAULTS ─────────────────────────────────────────
+
+  const DJ_PLAYLISTS_SPOTIFY = {
+    retro:  { zen: 'spotify:playlist:37i9dQZF1DWTx0xog3gN3q', flowing: 'spotify:playlist:37i9dQZF1DWULEW2RfoSCi', focused: 'spotify:playlist:37i9dQZF1DWWvhKV4FBciw', charged: 'spotify:playlist:37i9dQZF1DX4WgZiuR77Ef', emergency: 'spotify:playlist:37i9dQZF1DX1MUPbVKMgJE' },
+    rock:   { zen: 'spotify:playlist:37i9dQZF1DX6xOPeSOGone', flowing: 'spotify:playlist:37i9dQZF1DWXRqgorJj26U', focused: 'spotify:playlist:37i9dQZF1DXdOEFt9ZX0dh', charged: 'spotify:playlist:37i9dQZF1DX1X7WV84927n', emergency: 'spotify:playlist:37i9dQZF1DWTcqUzwhNmKv' },
+    reggae: { zen: 'spotify:playlist:37i9dQZF1DX83I5je4W4rP', flowing: 'spotify:playlist:37i9dQZF1DXbSbnqxMTGx9', focused: 'spotify:playlist:37i9dQZF1E4BF4A7UFAmeI', charged: 'spotify:playlist:37i9dQZF1DXan38dNVDdl4', emergency: 'spotify:playlist:37i9dQZF1DWW7BONj8RiqI' },
+    jazz:   { zen: 'spotify:playlist:37i9dQZF1DX4sWSpwq3LiO', flowing: 'spotify:playlist:37i9dQZF1DWVqfgj8NZEp1', focused: 'spotify:playlist:37i9dQZF1DWV7EzJMK2FUI', charged: 'spotify:playlist:37i9dQZF1EIeHZ9VTUfOrv', emergency: 'spotify:playlist:37i9dQZF1DX3rTk9UUrbYS' },
+    lofi:       { zen: 'spotify:playlist:37i9dQZF1DWZeKCadgRdKQ', flowing: 'spotify:playlist:37i9dQZF1DWWQRwui0ExPn', focused: 'spotify:playlist:37i9dQZF1DX8Uebhn9wzrS', charged: 'spotify:playlist:37i9dQZF1DWXLeA8Omikj7', emergency: 'spotify:playlist:37i9dQZF1DX76Wlfdnj7AP' },
+    hiphop:     { zen: 'spotify:playlist:37i9dQZF1DWVA1Gq4XHa6U', flowing: 'spotify:playlist:37i9dQZF1DX6GwdWRQMQpq', focused: 'spotify:playlist:37i9dQZF1DWY6tYEFs22tT', charged: 'spotify:playlist:37i9dQZF1DWY4xHQp97fN6', emergency: 'spotify:playlist:37i9dQZF1DX0XUsuxWHRQd' },
+    electronic: { zen: 'spotify:playlist:37i9dQZF1DX3Ogo9pFvBkY', flowing: 'spotify:playlist:37i9dQZF1DX4dyzvuaRJ0n', focused: 'spotify:playlist:37i9dQZF1DX32NsLKyzScr', charged: 'spotify:playlist:37i9dQZF1DX8tZsk68tuDw', emergency: 'spotify:playlist:37i9dQZF1DX6J5NfMJS675' },
+    classical:  { zen: 'spotify:playlist:37i9dQZF1DX4sWSpwq3LiO', flowing: 'spotify:playlist:37i9dQZF1DWVFeEut75IAL', focused: 'spotify:playlist:37i9dQZF1DXd5zUwdn6lPb', charged: 'spotify:playlist:37i9dQZF1DX2aCk0vzzaZQ', emergency: 'spotify:playlist:37i9dQZF1DX9G9wwzwWL2k' }
   };
+
+  const DJ_PLAYLISTS_APPLEMUSIC = {
+    retro:  { zen: 'https://music.apple.com/us/playlist/quiet-storm-essentials/pl.de50676316b8498fb257847815cfcde9', flowing: 'https://music.apple.com/us/playlist/soulful-70s/pl.c1f19746fab040e29d609acf3582d9df', focused: 'https://music.apple.com/us/playlist/funk-essentials/pl.d3a816dac5504f4fa364ccab8ba40061', charged: 'https://music.apple.com/us/playlist/best-of-disco-hits/pl.dd3c0fce4ebd449387fb9273b182f2be', emergency: 'https://music.apple.com/us/playlist/disco-deep-cuts/pl.e9ffa7c33a824c7da1aa0e1362b89591' },
+    rock:   { zen: 'https://music.apple.com/us/playlist/rock-hits-unplugged/pl.5cd369ebc40b49d883b643c67d1e493d', flowing: 'https://music.apple.com/us/playlist/open-road-rockers-essentials/pl.38a5a6949d5645528d30be69210a6197', focused: 'https://music.apple.com/us/playlist/classic-rock-essentials/pl.1a7fd42205674dd282d106f533f4bea6', charged: 'https://music.apple.com/us/playlist/90s-hard-rock-essentials/pl.e6678ca6825344bb8b2599909b34e151', emergency: 'https://music.apple.com/us/playlist/extreme-metal/pl.1baada6675ca477cbe9946b3d21c5757' },
+    reggae: { zen: 'https://music.apple.com/us/playlist/dub-essentials/pl.670df4df61b24072a35d436b4babe34b', flowing: 'https://music.apple.com/us/playlist/all-reggae/pl.70e5370006504b09bff1119a281119f0', focused: 'https://music.apple.com/us/playlist/roots-reggae-essentials/pl.feff5243ee0d4dac9a6797dcd1655e3b', charged: 'https://music.apple.com/us/playlist/dancehall-essentials/pl.6f6a3b3ea84140d2accad4e8cba793e4', emergency: 'https://music.apple.com/us/playlist/dancehall-party/pl.ff6b7bc129974cf78b7fd72c22caa46c' },
+    jazz:   { zen: 'https://music.apple.com/us/playlist/jazz-chill/pl.63271312c084419891982eab46cc68ac', flowing: 'https://music.apple.com/us/playlist/best-of-cool-jazz/pl.f1c48202b0a6428d9b12fbd540b4ae47', focused: 'https://music.apple.com/us/playlist/jazz-standards-essentials/pl.1df21488f86845b790c2bd751d2fcc4a', charged: 'https://music.apple.com/us/playlist/hard-bop-essentials/pl.b3f47883cff249eda4701069d8491fd1', emergency: 'https://music.apple.com/us/playlist/free-jazz-essentials/pl.eadc259e6ed34923a0fd20d92213ee69' },
+    lofi:       { zen: 'https://music.apple.com/us/playlist/ambient-chill/pl.bed492442a53481f98e98c6c4da9e01d', flowing: 'https://music.apple.com/us/playlist/lofi-girl-beats-to-relax-study-to/pl.bf7a3cbca49644d8a33f09c1285aef5c', focused: 'https://music.apple.com/us/playlist/lofi-hip-hop-beats-to-relax-code-study-and-focus/pl.e27dd96b0d73426fba75dffd2a7f3607', charged: 'https://music.apple.com/us/playlist/up-beat-lofi/pl.3c657a4ea4914945b6320e5f9aea2d77', emergency: 'https://music.apple.com/us/playlist/lo-fi-breeze/pl.7197f862319747fcbb944c7baec9c2b6' },
+    hiphop:     { zen: 'https://music.apple.com/us/playlist/late-night-hip-hop/pl.c15a5391c65e44759efc3083463f88c4', flowing: 'https://music.apple.com/us/playlist/hip-hop-throwback/pl.5cc74856fdab4a65a33f5bd706ba88da', focused: 'https://music.apple.com/us/playlist/conscious-hip-hop-essentials/pl.f1a08ab31a35420d81a4dd62d12bf58d', charged: 'https://music.apple.com/us/playlist/the-trap/pl.219740042a4947d68b05556e570dcb00', emergency: 'https://music.apple.com/us/playlist/hype-workout/pl.f305ae37fa9141598659571996aece09' },
+    electronic: { zen: 'https://music.apple.com/us/playlist/ambient-essentials/pl.472dc0c5efe548bb9846e484378aa47b', flowing: 'https://music.apple.com/us/playlist/melodic-house-techno/pl.9642e1be452d43fca846dead91e6e8aa', focused: 'https://music.apple.com/us/playlist/deep-house-essentials/pl.b1f711892e794475ba644d1d2f21fe53', charged: 'https://music.apple.com/us/playlist/big-room-progressive-edm/pl.9f31633e78554bc0802774dd9821c244', emergency: 'https://music.apple.com/us/playlist/hard-dance-hard-trance-tech-hardstyle/pl.179d606b13034cdd9d7ca5a6841edd39' },
+    classical:  { zen: 'https://music.apple.com/us/playlist/relaxing-classical/pl.c2ab8af2e9e74576b3bb45d62819d5cd', flowing: 'https://music.apple.com/us/playlist/baroque-essentials/pl.4f94ca7ffe7d48538bd0e2606f1d3bbb', focused: 'https://music.apple.com/us/playlist/classical-concentration/pl.cf8514b686374fadbe6807a6339dfd89', charged: 'https://music.apple.com/us/playlist/classical-hits/pl.9dc583e20e344cc4bf7dc823abde7a2c', emergency: 'https://music.apple.com/us/playlist/epic-classical-music/pl.dc81f460b5fa49fda46c86489135aaff' }
+  };
+
+  const DJ_PLAYLISTS_YOUTUBEMUSIC = {
+    retro:  { zen: '', flowing: 'https://music.youtube.com/playlist?list=RDCLAK5uy_nxZ3Bp0gO6_Wkb3bp9jESFoOz6bANXw4s', focused: 'https://music.youtube.com/playlist?list=RDCLAK5uy_kzJF5L0orSQpW0MBQyGjFlWVm2J_TmQPo', charged: '', emergency: '' },
+    rock:   { zen: 'https://music.youtube.com/playlist?list=PLCD0445C57F2B7F41', flowing: '', focused: '', charged: 'https://music.youtube.com/playlist?list=PL3485902CC4FB6C67', emergency: '' },
+    reggae: { zen: '', flowing: '', focused: '', charged: '', emergency: '' },
+    jazz:   { zen: '', flowing: '', focused: 'https://music.youtube.com/playlist?list=RDCLAK5uy_kyZ7N5lM0kUpn7NbydMRujcq4aTEesP9I', charged: '', emergency: '' },
+    lofi:       { zen: 'https://music.youtube.com/playlist?list=RDCLAK5uy_kb7EBi6y3GrtJri4_ZH56Ms786DFEimbM', flowing: 'https://music.youtube.com/playlist?list=RDCLAK5uy_lakC34Al6Kd5kidN8Bq0jpdnGUpIw2ctQ', focused: '', charged: '', emergency: '' },
+    hiphop:     { zen: 'https://music.youtube.com/playlist?list=RDCLAK5uy_kKEOZ3x5ED4hNxb8lHXhOp5cHFW_CbwMk', flowing: '', focused: 'https://music.youtube.com/playlist?list=RDCLAK5uy_n7QjhERM2Q4Ha5B6t6ZmzyhOtRYjQtxKk', charged: '', emergency: '' },
+    electronic: { zen: 'https://music.youtube.com/playlist?list=RDCLAK5uy_mPolD_J22gS1SKxufARWcTZd1UrAH_0ZI', flowing: 'https://music.youtube.com/playlist?list=RDCLAK5uy_kBbljBMZ2exMXUc3MZdtXHsMwvGqf3eE8', focused: '', charged: '', emergency: '' },
+    classical:  { zen: '', flowing: '', focused: '', charged: '', emergency: '' }
+  };
+
+  const SERVICE_PLAYLIST_DEFAULTS = {
+    spotify:      DJ_PLAYLISTS_SPOTIFY,
+    applemusic:   DJ_PLAYLISTS_APPLEMUSIC,
+    youtubemusic: DJ_PLAYLISTS_YOUTUBEMUSIC
+  };
+
+  function resolvePlaylist(djId, mood) {
+    const userOverride = (settings.playlists[djId] || {})[mood];
+    if (userOverride) return userOverride;
+    const svcDefaults = SERVICE_PLAYLIST_DEFAULTS[settings.musicService] || DJ_PLAYLISTS_SPOTIFY;
+    return (svcDefaults[djId] || {})[mood] || '';
+  }
 
   // ── DJ PERSONALITIES ───────────────────────────────────────────────────
 
@@ -542,16 +582,13 @@ if (window.__hdjLoaded) {
     if (btn) {
       btn.setAttribute('data-mood', mood);
       btn.style.setProperty('--hdj-ring', 'transparent');
-      btn.classList.remove('hdj-has-suggestion');
     }
 
     const dj       = DJS[settings.dj] || DJS.lofi;
     const moodData = dj[mood];
     const color    = MOOD_COLORS[mood];
     const moodLabel = mood.charAt(0).toUpperCase() + mood.slice(1);
-    const djDefaults  = (DJS[settings.dj] || DJS.lofi).playlists || {};
-    const userOverride = (settings.playlists[settings.dj] || {})[mood];
-    const playlistUri = userOverride || djDefaults[mood] || DEFAULT_PLAYLISTS[mood];
+    const playlistUri = resolvePlaylist(settings.dj, mood);
 
     const panel = document.createElement('div');
     panel.id = 'hdj-panel';
@@ -747,9 +784,7 @@ if (window.__hdjLoaded) {
     const serviceReady   = isSpotify ? settings.spotifyConnected : true;
     if (settings.autoChange && serviceReady && mood !== lastAcknowledgedMood) {
       // Auto-switch playlist to match new mood
-      const djDefaults   = (DJS[settings.dj] || DJS.lofi).playlists || {};
-      const userOverride = (settings.playlists[settings.dj] || {})[mood];
-      const uri          = userOverride || djDefaults[mood] || DEFAULT_PLAYLISTS[mood];
+      const uri = resolvePlaylist(settings.dj, mood);
       if (!uri) return; // no playlist configured for this mood/service
       const msg = isSpotify ? { type: 'SPOTIFY_PLAY', uri } : { type: 'URL_PLAY', url: uri };
       _api.runtime.sendMessage(msg, res => {
@@ -760,15 +795,11 @@ if (window.__hdjLoaded) {
           if (btn) {
             btn.setAttribute('data-mood', mood);
             btn.style.setProperty('--hdj-ring', 'transparent');
-            btn.classList.remove('hdj-has-suggestion');
-          }
+                }
         }
       });
     } else {
       updateToggleColor(mood);
-      // Show suggestion dot when mood has shifted since user last opened the panel
-      const btn = document.getElementById('hdj-toggle');
-      if (btn) btn.classList.toggle('hdj-has-suggestion', mood !== lastAcknowledgedMood);
     }
   }
 
@@ -896,8 +927,6 @@ if (window.__hdjLoaded) {
     if (!valid.includes(mood)) { console.warn('HDJ: valid moods are', valid); return; }
     currentMood = mood;
     updateToggleColor(mood);
-    const btn = document.getElementById('hdj-toggle');
-    if (btn) btn.classList.toggle('hdj-has-suggestion', mood !== lastAcknowledgedMood);
     console.log('HDJ: mood forced to', mood);
   };
 

@@ -50,24 +50,6 @@
 #hdj-toggle[data-mood="emergency"] { background: #ef4444 !important; }
 
 /* Suggestion dot — appears when mood has changed since panel was last opened */
-#hdj-toggle.hdj-has-suggestion::after {
-  content: '';
-  position: absolute;
-  top: 2px;
-  right: 2px;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #fff;
-  border: 2px solid currentColor;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  animation: hdj-dot-pop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-@keyframes hdj-dot-pop {
-  from { transform: scale(0); opacity: 0; }
-  to   { transform: scale(1); opacity: 1; }
-}
 
 /* Pulse animation when mood changes to charged/emergency */
 #hdj-toggle[data-mood="charged"],
