@@ -8,6 +8,269 @@ if (window.__hdjLoaded) {
 
   const _api = typeof browser !== 'undefined' ? browser : chrome;
 
+  // ── UI STRINGS (localisation) ──────────────────────────────────────────
+
+  const UI_STRINGS = {
+    'en-AU': {
+      toggleTitle:  'Huddo DJ for HCL Verse (Alt+D)',
+      connectHint:  'Connect Spotify to start the music',
+      connectBtn:   'Connect Spotify',
+      noPlaylist:   'No playlist set for this mood — add one in settings',
+      close:        'Close',
+      starting:     'Starting\u2026',
+      connecting:   'Connecting\u2026',
+      playingSpotify: '\u266b Playing on Spotify',
+      openingIn:    svc => `\u266b Opening in ${svc}`,
+      couldNotOpen: svc => `Could not open ${svc} \u2014 please try again.`,
+      connFailed:   'Connection failed \u2014 please try again.',
+    },
+    'en-GB': {
+      toggleTitle:  'Huddo DJ for HCL Verse (Alt+D)',
+      connectHint:  'Connect Spotify to start the music',
+      connectBtn:   'Connect Spotify',
+      noPlaylist:   'No playlist set for this mood \u2014 add one in settings',
+      close:        'Close',
+      starting:     'Starting\u2026',
+      connecting:   'Connecting\u2026',
+      playingSpotify: '\u266b Playing on Spotify',
+      openingIn:    svc => `\u266b Opening in ${svc}`,
+      couldNotOpen: svc => `Could not open ${svc} \u2014 please try again.`,
+      connFailed:   'Connection failed \u2014 please try again.',
+    },
+    'en': {
+      toggleTitle:  'Huddo DJ for HCL Verse (Alt+D)',
+      connectHint:  'Connect Spotify to start the music',
+      connectBtn:   'Connect Spotify',
+      noPlaylist:   'No playlist set for this mood \u2014 add one in settings',
+      close:        'Close',
+      starting:     'Starting\u2026',
+      connecting:   'Connecting\u2026',
+      playingSpotify: '\u266b Playing on Spotify',
+      openingIn:    svc => `\u266b Opening in ${svc}`,
+      couldNotOpen: svc => `Could not open ${svc} \u2014 please try again.`,
+      connFailed:   'Connection failed \u2014 please try again.',
+    },
+    'de': {
+      toggleTitle:  'Huddo DJ for HCL Verse (Alt+D)',
+      connectHint:  'Spotify verbinden, um die Musik zu starten',
+      connectBtn:   'Spotify verbinden',
+      noPlaylist:   'Keine Playlist f\u00fcr diese Stimmung \u2014 eine in den Einstellungen hinzuf\u00fcgen',
+      close:        'Schlie\u00dfen',
+      starting:     'Wird gestartet\u2026',
+      connecting:   'Verbinde\u2026',
+      playingSpotify: '\u266b Wird auf Spotify abgespielt',
+      openingIn:    svc => `\u266b \u00d6ffne in ${svc}`,
+      couldNotOpen: svc => `${svc} konnte nicht ge\u00f6ffnet werden \u2014 bitte erneut versuchen.`,
+      connFailed:   'Verbindung fehlgeschlagen \u2014 bitte erneut versuchen.',
+    },
+    'fr': {
+      toggleTitle:  'Huddo DJ for HCL Verse (Alt+D)',
+      connectHint:  'Connecter Spotify pour lancer la musique',
+      connectBtn:   'Connecter Spotify',
+      noPlaylist:   'Aucune playlist d\u00e9finie pour cette humeur \u2014 ajoutez-en une dans les param\u00e8tres',
+      close:        'Fermer',
+      starting:     'D\u00e9marrage\u2026',
+      connecting:   'Connexion\u2026',
+      playingSpotify: '\u266b Lecture sur Spotify',
+      openingIn:    svc => `\u266b Ouverture dans ${svc}`,
+      couldNotOpen: svc => `Impossible d\u2019ouvrir ${svc} \u2014 veuillez r\u00e9essayer.`,
+      connFailed:   'Connexion \u00e9chou\u00e9e \u2014 veuillez r\u00e9essayer.',
+    },
+    'it': {
+      toggleTitle:  'Huddo DJ for HCL Verse (Alt+D)',
+      connectHint:  'Connetti Spotify per avviare la musica',
+      connectBtn:   'Connetti Spotify',
+      noPlaylist:   'Nessuna playlist impostata per questo umore \u2014 aggiungine una nelle impostazioni',
+      close:        'Chiudi',
+      starting:     'Avvio\u2026',
+      connecting:   'Connessione\u2026',
+      playingSpotify: '\u266b In riproduzione su Spotify',
+      openingIn:    svc => `\u266b Apertura in ${svc}`,
+      couldNotOpen: svc => `Impossibile aprire ${svc} \u2014 riprova.`,
+      connFailed:   'Connessione fallita \u2014 riprova.',
+    },
+    'es': {
+      toggleTitle:  'Huddo DJ for HCL Verse (Alt+D)',
+      connectHint:  'Conecta Spotify para empezar la m\u00fasica',
+      connectBtn:   'Conectar Spotify',
+      noPlaylist:   'No hay playlist para este estado de \u00e1nimo \u2014 a\u00f1ade una en ajustes',
+      close:        'Cerrar',
+      starting:     'Iniciando\u2026',
+      connecting:   'Conectando\u2026',
+      playingSpotify: '\u266b Reproduciendo en Spotify',
+      openingIn:    svc => `\u266b Abriendo en ${svc}`,
+      couldNotOpen: svc => `No se pudo abrir ${svc} \u2014 int\u00e9ntalo de nuevo.`,
+      connFailed:   'Conexi\u00f3n fallida \u2014 int\u00e9ntalo de nuevo.',
+    },
+    'pt-BR': {
+      toggleTitle:  'Huddo DJ for HCL Verse (Alt+D)',
+      connectHint:  'Conecte o Spotify para iniciar a m\u00fasica',
+      connectBtn:   'Conectar Spotify',
+      noPlaylist:   'Nenhuma playlist definida para este humor \u2014 adicione uma nas configura\u00e7\u00f5es',
+      close:        'Fechar',
+      starting:     'Iniciando\u2026',
+      connecting:   'Conectando\u2026',
+      playingSpotify: '\u266b Reproduzindo no Spotify',
+      openingIn:    svc => `\u266b Abrindo no ${svc}`,
+      couldNotOpen: svc => `N\u00e3o foi poss\u00edvel abrir ${svc} \u2014 tente novamente.`,
+      connFailed:   'Conex\u00e3o falhou \u2014 tente novamente.',
+    },
+    'nl': {
+      toggleTitle:  'Huddo DJ for HCL Verse (Alt+D)',
+      connectHint:  'Verbind Spotify om de muziek te starten',
+      connectBtn:   'Spotify verbinden',
+      noPlaylist:   'Geen afspeellijst ingesteld voor deze stemming \u2014 voeg er een toe in de instellingen',
+      close:        'Sluiten',
+      starting:     'Starten\u2026',
+      connecting:   'Verbinden\u2026',
+      playingSpotify: '\u266b Afspelen op Spotify',
+      openingIn:    svc => `\u266b Openen in ${svc}`,
+      couldNotOpen: svc => `Kon ${svc} niet openen \u2014 probeer het opnieuw.`,
+      connFailed:   'Verbinding mislukt \u2014 probeer het opnieuw.',
+    },
+    'ru': {
+      toggleTitle:  'Huddo DJ for HCL Verse (Alt+D)',
+      connectHint:  '\u041f\u043e\u0434\u043a\u043b\u044e\u0447\u0438\u0442\u0435 Spotify \u0434\u043b\u044f \u0437\u0430\u043f\u0443\u0441\u043a\u0430 \u043c\u0443\u0437\u044b\u043a\u0438',
+      connectBtn:   '\u041f\u043e\u0434\u043a\u043b\u044e\u0447\u0438\u0442\u044c Spotify',
+      noPlaylist:   '\u041f\u043b\u0435\u0439\u043b\u0438\u0441\u0442 \u043d\u0435 \u0437\u0430\u0434\u0430\u043d \u0434\u043b\u044f \u044d\u0442\u043e\u0433\u043e \u043d\u0430\u0441\u0442\u0440\u043e\u0435\u043d\u0438\u044f \u2014 \u0434\u043e\u0431\u0430\u0432\u044c\u0442\u0435 \u0435\u0433\u043e \u0432 \u043d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0430\u0445',
+      close:        '\u0417\u0430\u043a\u0440\u044b\u0442\u044c',
+      starting:     '\u0417\u0430\u043f\u0443\u0441\u043a\u2026',
+      connecting:   '\u041f\u043e\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u0435\u2026',
+      playingSpotify: '\u266b \u0412\u043e\u0441\u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0438\u0442\u0441\u044f \u0432 Spotify',
+      openingIn:    svc => `\u266b \u041e\u0442\u043a\u0440\u044b\u0442\u0438\u0435 \u0432 ${svc}`,
+      couldNotOpen: svc => `\u041d\u0435 \u0443\u0434\u0430\u043b\u043e\u0441\u044c \u043e\u0442\u043a\u0440\u044b\u0442\u044c ${svc} \u2014 \u043f\u043e\u043f\u0440\u043e\u0431\u0443\u0439\u0442\u0435 \u0435\u0449\u0451 \u0440\u0430\u0437.`,
+      connFailed:   '\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u043e\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u044f \u2014 \u043f\u043e\u043f\u0440\u043e\u0431\u0443\u0439\u0442\u0435 \u0435\u0449\u0451 \u0440\u0430\u0437.',
+    },
+    'pl': {
+      toggleTitle:  'Huddo DJ for HCL Verse (Alt+D)',
+      connectHint:  'Po\u0142\u0105cz Spotify, aby uruchomi\u0107 muzyk\u0119',
+      connectBtn:   'Po\u0142\u0105cz Spotify',
+      noPlaylist:   'Brak playlisty dla tego nastroju \u2014 dodaj j\u0105 w ustawieniach',
+      close:        'Zamknij',
+      starting:     'Uruchamianie\u2026',
+      connecting:   '\u0141\u0105czenie\u2026',
+      playingSpotify: '\u266b Odtwarzanie na Spotify',
+      openingIn:    svc => `\u266b Otwieranie w ${svc}`,
+      couldNotOpen: svc => `Nie uda\u0142o si\u0119 otworzy\u0107 ${svc} \u2014 spr\u00f3buj ponownie.`,
+      connFailed:   'Po\u0142\u0105czenie nieudane \u2014 spr\u00f3buj ponownie.',
+    },
+    'cs': {
+      toggleTitle:  'Huddo DJ for HCL Verse (Alt+D)',
+      connectHint:  'P\u0159ipojte Spotify pro spou\u0161t\u011bn\u00ed hudby',
+      connectBtn:   'P\u0159ipojit Spotify',
+      noPlaylist:   '\u017d\u00e1dn\u00fd playlist pro tuto n\u00e1ladu \u2014 p\u0159idejte ho v nastaven\u00ed',
+      close:        'Zav\u0159\u00edt',
+      starting:     'Spou\u0161t\u00edm\u2026',
+      connecting:   'P\u0159ipojuji\u2026',
+      playingSpotify: '\u266b P\u0159ehr\u00e1v\u00e1n\u00ed na Spotify',
+      openingIn:    svc => `\u266b Otev\u00edr\u00e1m v ${svc}`,
+      couldNotOpen: svc => `Nelze otev\u0159\u00edt ${svc} \u2014 zkuste to znovu.`,
+      connFailed:   'P\u0159ipojen\u00ed selhalo \u2014 zkuste to znovu.',
+    },
+    'hu': {
+      toggleTitle:  'Huddo DJ for HCL Verse (Alt+D)',
+      connectHint:  'Csatlakozz a Spotifyhoz a zene el\u00ednd\u00edt\u00e1s\u00e1hoz',
+      connectBtn:   'Spotify csatlakoztat\u00e1sa',
+      noPlaylist:   'Nincs lej\u00e1tsz\u00e1si lista ehhez a hangulathoz \u2014 adj hozz\u00e1 egyet a be\u00e1ll\u00edt\u00e1sokban',
+      close:        'Bez\u00e1r\u00e1s',
+      starting:     'Ind\u00edt\u00e1s\u2026',
+      connecting:   'Csatlakoz\u00e1s\u2026',
+      playingSpotify: '\u266b Lej\u00e1tsz\u00e1s a Spotify-on',
+      openingIn:    svc => `\u266b Megnyit\u00e1s: ${svc}`,
+      couldNotOpen: svc => `Nem siker\u00fclt megnyitni: ${svc} \u2014 pr\u00f3b\u00e1ld \u00fajra.`,
+      connFailed:   'Csatlakoz\u00e1s sikertelen \u2014 pr\u00f3b\u00e1ld \u00fajra.',
+    },
+    'ja': {
+      toggleTitle:  'Huddo DJ for HCL Verse (Alt+D)',
+      connectHint:  'Spotify\u3092\u63a5\u7d9a\u3057\u3066\u97f3\u697d\u3092\u958b\u59cb\u3059\u308b',
+      connectBtn:   'Spotify\u3092\u63a5\u7d9a',
+      noPlaylist:   '\u3053\u306e\u30e0\u30fc\u30c9\u306e\u30d7\u30ec\u30a4\u30ea\u30b9\u30c8\u304c\u8a2d\u5b9a\u3055\u308c\u3066\u3044\u307e\u305b\u3093 \u2014 \u8a2d\u5b9a\u3067\u8ffd\u52a0\u3057\u3066\u304f\u3060\u3055\u3044',
+      close:        '\u9589\u3058\u308b',
+      starting:     '\u958b\u59cb\u4e2d\u2026',
+      connecting:   '\u63a5\u7d9a\u4e2d\u2026',
+      playingSpotify: '\u266b Spotify\u3067\u518d\u751f\u4e2d',
+      openingIn:    svc => `\u266b ${svc}\u3067\u958b\u304f`,
+      couldNotOpen: svc => `${svc}\u3092\u958b\u3051\u307e\u305b\u3093\u3067\u3057\u305f \u2014 \u3082\u3046\u4e00\u5ea6\u304a\u8a66\u3057\u304f\u3060\u3055\u3044\u3002`,
+      connFailed:   '\u63a5\u7d9a\u306b\u5931\u6557\u3057\u307e\u3057\u305f \u2014 \u3082\u3046\u4e00\u5ea6\u304a\u8a66\u3057\u304f\u3060\u3055\u3044\u3002',
+    },
+    'ko': {
+      toggleTitle:  'Huddo DJ for HCL Verse (Alt+D)',
+      connectHint:  'Spotify\ub97c \uc5f0\uacb0\ud558\uc5ec \uc74c\uc545\uc744 \uc2dc\uc791\ud558\uc138\uc694',
+      connectBtn:   'Spotify \uc5f0\uacb0',
+      noPlaylist:   '\uc774 \uae30\ubd84\uc5d0 \uc124\uc815\ub41c \ud50c\ub808\uc774\ub9ac\uc2a4\ud2b8\uac00 \uc5c6\uc2b5\ub2c8\ub2e4 \u2014 \uc124\uc815\uc5d0\uc11c \ucd94\uac00\ud558\uc138\uc694',
+      close:        '\ub2eb\uae30',
+      starting:     '\uc2dc\uc791 \uc911\u2026',
+      connecting:   '\uc5f0\uacb0 \uc911\u2026',
+      playingSpotify: '\u266b Spotify\uc5d0\uc11c \uc7ac\uc0dd \uc911',
+      openingIn:    svc => `\u266b ${svc}\uc5d0\uc11c \uc5f4\uae30`,
+      couldNotOpen: svc => `${svc}\uc744(\ub97c) \uc5f4 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4 \u2014 \ub2e4\uc2dc \uc2dc\ub3c4\ud574 \uc8fc\uc138\uc694.`,
+      connFailed:   '\uc5f0\uacb0 \uc2e4\ud328 \u2014 \ub2e4\uc2dc \uc2dc\ub3c4\ud574 \uc8fc\uc138\uc694.',
+    },
+    'zh': {
+      toggleTitle:  'Huddo DJ for HCL Verse (Alt+D)',
+      connectHint:  '\u8fde\u63a5 Spotify \u4ee5\u5f00\u59cb\u64ad\u653e\u97f3\u4e50',
+      connectBtn:   '\u8fde\u63a5 Spotify',
+      noPlaylist:   '\u6b64\u60c5\u7eea\u6ca1\u6709\u8bbe\u7f6e\u64ad\u653e\u5217\u8868 \u2014 \u5728\u8bbe\u7f6e\u4e2d\u6dfb\u52a0\u4e00\u4e2a',
+      close:        '\u5173\u95ed',
+      starting:     '\u6b63\u5728\u542f\u52a8\u2026',
+      connecting:   '\u8fde\u63a5\u4e2d\u2026',
+      playingSpotify: '\u266b \u6b63\u5728 Spotify \u64ad\u653e',
+      openingIn:    svc => `\u266b \u5728 ${svc} \u4e2d\u6253\u5f00`,
+      couldNotOpen: svc => `\u65e0\u6cd5\u6253\u5f00 ${svc} \u2014 \u8bf7\u91cd\u8bd5\u3002`,
+      connFailed:   '\u8fde\u63a5\u5931\u8d25 \u2014 \u8bf7\u91cd\u8bd5\u3002',
+    },
+    'zh-TW': {
+      toggleTitle:  'Huddo DJ for HCL Verse (Alt+D)',
+      connectHint:  '\u9023\u63a5 Spotify \u4ee5\u958b\u59cb\u64ad\u653e\u97f3\u6a02',
+      connectBtn:   '\u9023\u63a5 Spotify',
+      noPlaylist:   '\u6b64\u60c5\u7dd2\u6c92\u6709\u8a2d\u5b9a\u64ad\u653e\u6e05\u55ae \u2014 \u5728\u8a2d\u5b9a\u4e2d\u65b0\u589e\u4e00\u500b',
+      close:        '\u95dc\u9589',
+      starting:     '\u6b63\u5728\u555f\u52d5\u2026',
+      connecting:   '\u9023\u63a5\u4e2d\u2026',
+      playingSpotify: '\u266b \u6b63\u5728 Spotify \u64ad\u653e',
+      openingIn:    svc => `\u266b \u5728 ${svc} \u4e2d\u958b\u555f`,
+      couldNotOpen: svc => `\u7121\u6cd5\u958b\u555f ${svc} \u2014 \u8acb\u91cd\u8a66\u3002`,
+      connFailed:   '\u9023\u63a5\u5931\u6557 \u2014 \u8acb\u91cd\u8a66\u3002',
+    },
+    'eu': {
+      toggleTitle:  'Huddo DJ for HCL Verse (Alt+D)',
+      connectHint:  'Konektatu Spotify musika hasteko',
+      connectBtn:   'Spotify konektatu',
+      noPlaylist:   'Ez dago playlist bat aldarte honetarako \u2014 gehitu bat ezarpenetan',
+      close:        'Itxi',
+      starting:     'Hasten\u2026',
+      connecting:   'Konektatzen\u2026',
+      playingSpotify: '\u266b Spotifyn erreproduzitzen',
+      openingIn:    svc => `\u266b ${svc}n irekitzen`,
+      couldNotOpen: svc => `Ezin izan da ${svc} ireki \u2014 saiatu berriro.`,
+      connFailed:   'Konexioa huts egin du \u2014 saiatu berriro.',
+    },
+    'ca': {
+      toggleTitle:  'Huddo DJ for HCL Verse (Alt+D)',
+      connectHint:  'Connecteu Spotify per iniciar la m\u00fasica',
+      connectBtn:   'Connectar Spotify',
+      noPlaylist:   'No hi ha cap llista de reproducci\u00f3 per a aquest estat d\u2019\u00e0nim \u2014 afegiu-ne una a la configuraci\u00f3',
+      close:        'Tanca',
+      starting:     'Iniciant\u2026',
+      connecting:   'Connectant\u2026',
+      playingSpotify: '\u266b Reproduint a Spotify',
+      openingIn:    svc => `\u266b Obrint a ${svc}`,
+      couldNotOpen: svc => `No s\u2019ha pogut obrir ${svc} \u2014 torneu a intentar-ho.`,
+      connFailed:   'Connexi\u00f3 fallida \u2014 torneu a intentar-ho.',
+    },
+  };
+
+  function getActiveLang() {
+    const code = settings.language || navigator.language || 'en';
+    if (UI_STRINGS[code]) return code;
+    const prefix = code.split('-')[0];
+    return Object.keys(UI_STRINGS).find(k => k === prefix) || 'en-AU';
+  }
+
+  function getStrings() {
+    return UI_STRINGS[getActiveLang()] || UI_STRINGS['en-AU'];
+  }
+
   // ── MOOD LEVELS & SCORING ──────────────────────────────────────────────
 
   const MOOD_THRESHOLDS = [20, 40, 60, 80]; // boundaries between zen/flowing/focused/charged/emergency
@@ -249,7 +512,8 @@ if (window.__hdjLoaded) {
     musicService:     'spotify',
     autoChange:       false,
     scoring:          { ...DEFAULT_SCORING },
-    urgentKeywords:   [...URGENT_KEYWORDS]
+    urgentKeywords:   [...URGENT_KEYWORDS],
+    language:         ''
   };
   let baseline         = { avg: null, samples: 0 };
   let arrivalTimes     = [];   // timestamps of detected new emails (last 30 min)
@@ -266,7 +530,7 @@ if (window.__hdjLoaded) {
     return new Promise(resolve => {
       _api.storage.local.get(
         ['edj_verseUrl', 'edj_dj', 'edj_playlists', 'edj_vipSenders',
-         'edj_baseline', 'edj_spotifyConnected', 'edj_musicService', 'edj_autoChange', 'edj_scoring', 'edj_urgentKeywords'],
+         'edj_baseline', 'edj_spotifyConnected', 'edj_musicService', 'edj_autoChange', 'edj_scoring', 'edj_urgentKeywords', 'edj_language'],
         r => {
           settings.verseUrl         = r.edj_verseUrl || '';
           settings.dj               = r.edj_dj || 'lofi';
@@ -277,6 +541,7 @@ if (window.__hdjLoaded) {
           settings.autoChange       = r.edj_autoChange || false;
           settings.scoring          = r.edj_scoring ? { ...DEFAULT_SCORING, ...r.edj_scoring } : { ...DEFAULT_SCORING };
           settings.urgentKeywords   = r.edj_urgentKeywords || [...URGENT_KEYWORDS];
+          settings.language         = r.edj_language || '';
           if (r.edj_baseline) baseline = r.edj_baseline;
           resolve();
         }
@@ -532,7 +797,7 @@ if (window.__hdjLoaded) {
 
     const btn = document.createElement('button');
     btn.id    = 'hdj-toggle';
-    btn.title = 'Huddo DJ for HCL Verse (Alt+D)';
+    btn.title = getStrings().toggleTitle;
     // Headphone icon
     btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="26" height="26" aria-hidden="true">
       <path d="M12 3a9 9 0 0 0-9 9v7a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H5v-2a7 7 0 1 1 14 0v2h-2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-7a9 9 0 0 0-9-9z"/>
@@ -596,10 +861,11 @@ if (window.__hdjLoaded) {
 
     const isSpotify = settings.musicService === 'spotify';
     const needsAuth = isSpotify && !settings.spotifyConnected;
+    const s = getStrings();
     const actionsHtml = needsAuth
       ? `<div class="hdj-connect-cta">
-           <p class="hdj-connect-hint">Connect Spotify to start the music</p>
-           <button class="hdj-btn-connect">Connect Spotify</button>
+           <p class="hdj-connect-hint">${esc(s.connectHint)}</p>
+           <button class="hdj-btn-connect">${esc(s.connectBtn)}</button>
          </div>`
       : playlistUri
         ? `<div class="hdj-actions">
@@ -607,7 +873,7 @@ if (window.__hdjLoaded) {
              <button class="hdj-btn-pass">${esc(moodData.passBtn)}</button>
            </div>`
         : `<div class="hdj-connect-cta">
-             <p class="hdj-connect-hint">No playlist set for this mood — add one in settings</p>
+             <p class="hdj-connect-hint">${esc(s.noPlaylist)}</p>
            </div>`;
 
     const moodBarHtml = Object.entries(MOOD_COLORS).map(([m, c]) => `
@@ -624,7 +890,7 @@ if (window.__hdjLoaded) {
     panel.innerHTML = `
       <div class="hdj-header" style="background:${esc(color)}">
         <span class="hdj-dj-name">${esc(dj.emoji)} ${esc(dj.name)}</span>
-        <button class="hdj-close" title="Close" aria-label="Close">✕</button>
+        <button class="hdj-close" title="${esc(s.close)}" aria-label="${esc(s.close)}">✕</button>
       </div>
       <div class="hdj-dj-bar hdj-dj-bar--top">${djBarHtml}</div>
       <div class="hdj-mood-bar">${moodBarHtml}</div>
@@ -672,7 +938,7 @@ if (window.__hdjLoaded) {
       playBtn.addEventListener('click', () => {
         const uri = playBtn.dataset.uri;
         setStatus(panel, '');
-        playBtn.textContent = 'Starting…';
+        playBtn.textContent = getStrings().starting;
         playBtn.disabled    = true;
 
         const isSpotify = settings.musicService === 'spotify';
@@ -684,9 +950,9 @@ if (window.__hdjLoaded) {
         _api.runtime.sendMessage(msg, res => {
           const dj = DJS[settings.dj] || DJS.lofi;
           if (res?.ok) {
-            setStatus(panel, isSpotify ? '♫ Playing on Spotify' : `♫ Opening in ${svcLabel}`);
+            setStatus(panel, isSpotify ? getStrings().playingSpotify : getStrings().openingIn(svcLabel));
           } else {
-            setStatus(panel, res?.error || `Could not open ${svcLabel} — please try again.`);
+            setStatus(panel, res?.error || getStrings().couldNotOpen(svcLabel));
           }
           playBtn.textContent = dj[mood].playBtn;
           playBtn.disabled    = false;
@@ -702,15 +968,15 @@ if (window.__hdjLoaded) {
     const connectBtn = panel.querySelector('.hdj-btn-connect');
     if (connectBtn) {
       connectBtn.addEventListener('click', () => {
-        connectBtn.textContent = 'Connecting…';
+        connectBtn.textContent = getStrings().connecting;
         connectBtn.disabled    = true;
         _api.runtime.sendMessage({ type: 'SPOTIFY_AUTH' }, res => {
           if (res?.ok) {
             settings.spotifyConnected = true;
             openPanel(mood); // re-render with play button
           } else {
-            setStatus(panel, res?.error || 'Connection failed — please try again.');
-            connectBtn.textContent = 'Connect Spotify';
+            setStatus(panel, res?.error || getStrings().connFailed);
+            connectBtn.textContent = getStrings().connectBtn;
             connectBtn.disabled    = false;
           }
         });
@@ -872,7 +1138,7 @@ if (window.__hdjLoaded) {
 
     // React to settings changes made in the popup (without page reload)
     _api.storage.onChanged.addListener(changes => {
-      const keys = ['edj_verseUrl', 'edj_dj', 'edj_playlists', 'edj_vipSenders', 'edj_spotifyConnected', 'edj_musicService', 'edj_autoChange', 'edj_scoring', 'edj_urgentKeywords'];
+      const keys = ['edj_verseUrl', 'edj_dj', 'edj_playlists', 'edj_vipSenders', 'edj_spotifyConnected', 'edj_musicService', 'edj_autoChange', 'edj_scoring', 'edj_urgentKeywords', 'edj_language'];
       if (keys.some(k => k in changes)) loadSettings();
     });
   }

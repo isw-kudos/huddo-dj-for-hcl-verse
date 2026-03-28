@@ -75,6 +75,23 @@
       box-shadow: 0 0 0 3px rgba(22,163,74,0.15);
     }
 
+    select {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #d1d5db;
+      border-radius: 7px;
+      font-size: 13px;
+      color: #111827;
+      background: #fff;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      cursor: pointer;
+    }
+    select:focus {
+      border-color: #16a34a;
+      box-shadow: 0 0 0 3px rgba(22,163,74,0.15);
+    }
+
     .field-hint {
       font-size: 11px;
       color: #9ca3af;
@@ -306,8 +323,7 @@
       display: none;
       position: absolute;
       top: calc(100% + 6px);
-      left: 50%;
-      transform: translateX(-50%);
+      left: var(--tip-left, 0px);
       background: #1f2937;
       color: #f9fafb;
       font-size: 11px;
@@ -326,7 +342,7 @@
       content: '';
       position: absolute;
       bottom: 100%;
-      left: 50%;
+      left: var(--tip-arrow, 50%);
       transform: translateX(-50%);
       border: 5px solid transparent;
       border-bottom-color: #1f2937;
@@ -848,6 +864,37 @@
     <div class="card-title">Advanced</div>
     <button class="btn-reset" id="btnReset">Reset Inbox Baseline</button>
     <p class="reset-hint">Clears the learned "normal" unread count — useful after returning from leave.</p>
+  </div>
+
+  <!-- ── LANGUAGE ── -->
+  <div class="card">
+    <div class="card-title">Language</div>
+    <div class="field">
+      <label for="edj_language">Interface language</label>
+      <select id="edj_language">
+        <option value="">Auto-detect from browser</option>
+        <option value="en-AU">English (Australian)</option>
+        <option value="en-GB">English (British)</option>
+        <option value="en">English (American)</option>
+        <option value="de">Deutsch — German</option>
+        <option value="fr">Français — French</option>
+        <option value="it">Italiano — Italian</option>
+        <option value="es">Español — Spanish</option>
+        <option value="pt-BR">Português (Brasil) — Portuguese</option>
+        <option value="nl">Nederlands — Dutch</option>
+        <option value="ru">Русский — Russian</option>
+        <option value="pl">Polski — Polish</option>
+        <option value="cs">Čeština — Czech</option>
+        <option value="hu">Magyar — Hungarian</option>
+        <option value="ja">日本語 — Japanese</option>
+        <option value="ko">한국어 — Korean</option>
+        <option value="zh">中文（简体）— Chinese (Simplified)</option>
+        <option value="zh-TW">中文（繁體）— Chinese (Traditional)</option>
+        <option value="eu">Euskara — Basque</option>
+        <option value="ca">Català — Catalan</option>
+      </select>
+      <p class="field-hint">Auto-detect uses your browser's language setting. Changes take effect when you next open the DJ panel.</p>
+    </div>
   </div>
 
   <div class="footer-link">

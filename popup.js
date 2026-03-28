@@ -512,7 +512,8 @@ function saveAll() {
     edj_vipSenders:      vipSenders,
     edj_autoChange:      $('autoChange').checked,
     edj_scoring:         getScoringFromInputs(),
-    edj_urgentKeywords:  urgentKeywords
+    edj_urgentKeywords:  urgentKeywords,
+    edj_language:        $('edj_language').value
   }, () => {
     setStatus('Saved', false);
     setTimeout(() => setStatus(''), 2000);
@@ -524,13 +525,14 @@ const debouncedSave = debounce(saveAll, 800);
 // Attach auto-save listeners
 $('verseUrl').addEventListener('input', debouncedSave);
 $('autoChange').addEventListener('change', saveAll);
+$('edj_language').addEventListener('change', saveAll);
 // Playlist inputs are re-rendered dynamically — use delegation
 $('playlistInputs').addEventListener('input', debouncedSave);
 
 // ── LOAD ───────────────────────────────────────────────────────────────────
 
 _api.storage.local.get(
-  ['edj_verseUrl', 'edj_dj', 'edj_playlists', 'edj_musicService', 'edj_vipSenders', 'edj_spotifyConnected', 'edj_autoChange', 'edj_scoring', 'edj_urgentKeywords'],
+  ['edj_verseUrl', 'edj_dj', 'edj_playlists', 'edj_musicService', 'edj_vipSenders', 'edj_spotifyConnected', 'edj_autoChange', 'edj_scoring', 'edj_urgentKeywords', 'edj_language'],
   r => {
     $('verseUrl').value = r.edj_verseUrl || '';
     if (!r.edj_verseUrl) inheritVerseUrl($('verseUrl'));
@@ -552,6 +554,7 @@ _api.storage.local.get(
     renderKeywords();
     updateSpotifyUI();
     loadScoringInputs(r.edj_scoring || {});
+    if (r.edj_language !== undefined) $('edj_language').value = r.edj_language;
   }
 );
 
@@ -692,3 +695,32 @@ function esc(s) {
     .replace(/&/g, '&amp;').replace(/</g, '&lt;')
     .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
+
+// ── TOOLTIP POSITIONING ────────────────────────────────────────────────────
+// Tooltips are 230px wide but the info buttons can sit anywhere in the popup.
+// Calculate a clamped left offset for each tooltip so it always stays within
+// the popup bounds (8px margin either side).
+
+(function positionTooltips() {
+  const TIP_W   = 230;
+  const MARGIN  = 8;
+  const popupW  = document.documentElement.offsetWidth;
+
+  document.querySelectorAll('.info-wrap').forEach(wrap => {
+    const tip = wrap.querySelector('.info-tip');
+    if (!tip) return;
+
+    const { left: wL, width: wW } = wrap.getBoundingClientRect();
+    // Ideal: centre the tooltip on the button
+    const ideal   = wW / 2 - TIP_W / 2;
+    // Clamp so neither edge escapes the popup
+    const minLeft = MARGIN - wL;
+    const maxLeft = popupW - MARGIN - TIP_W - wL;
+    const clamped = Math.max(minLeft, Math.min(maxLeft, ideal));
+
+    tip.style.setProperty('--tip-left', Math.round(clamped) + 'px');
+    // Arrow points at centre of button regardless of tooltip shift
+    const arrowLeft = wW / 2 - clamped;
+    tip.style.setProperty('--tip-arrow', Math.round(arrowLeft) + 'px');
+  });
+})();
