@@ -134,6 +134,10 @@ git clone https://github.com/isw-kudos/huddo-dj-for-hcl-verse.git
 
 Open HCL Verse — you'll see a coloured **DJ button** in the bottom-right corner. Its colour reflects your current mood. Click it to open the panel, then click **Play** to start the music.
 
+### 5. Update companion extensions (if installed)
+
+If you also have [Huddo AI Assistant for HCL Verse](https://github.com/isw-kudos/huddo-ai-assistant-for-verse) or [Huddo LinkedIn Lookup](https://github.com/isw-kudos/huddo-linkedin-lookup) installed, make sure they are both up to date. These extensions run side by side in your Verse tab and share the same DOM — running mismatched versions can cause the panels to overlap or interfere with each other. Pull the latest code for each and reload them in your browser the same way you loaded this one.
+
 ---
 
 ## Connecting Spotify
