@@ -770,8 +770,12 @@ if (window.__hdjLoaded) {
       _api.storage.local.get('edj_pos', r => {
         const pos = r.edj_pos;
         if (pos && pos.left) {
-          panel.style.left   = pos.left;
-          panel.style.top    = pos.top;
+          const w = parseInt(pos.width)  || 300;
+          const h = parseInt(pos.height) || 200;
+          const clampedLeft = Math.min(Math.max(0, parseInt(pos.left)), window.innerWidth  - w - 8);
+          const clampedTop  = Math.min(Math.max(0, parseInt(pos.top)),  window.innerHeight - h - 8);
+          panel.style.left   = clampedLeft + 'px';
+          panel.style.top    = clampedTop  + 'px';
           panel.style.right  = 'auto';
           panel.style.bottom = 'auto';
           if (pos.width)  panel.style.width  = pos.width;
@@ -802,7 +806,7 @@ if (window.__hdjLoaded) {
     btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="26" height="26" aria-hidden="true">
       <path d="M12 3a9 9 0 0 0-9 9v7a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H5v-2a7 7 0 1 1 14 0v2h-2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-7a9 9 0 0 0-9-9z"/>
     </svg>`;
-    btn.addEventListener('click', togglePanel);
+    btn.addEventListener('click', e => { e.stopPropagation(); togglePanel(); });
     document.body.appendChild(btn);
     return btn;
   }
