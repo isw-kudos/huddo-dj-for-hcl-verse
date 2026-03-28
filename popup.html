@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Huddo DJ for HCL Verse</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 13px;
+      background: #f3f4f6;
+      color: #1f2937;
+      width: 420px;
+      min-height: 100px;
+    }
+
+    /* ── HEADER ── */
+    .hdr {
+      background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+      color: #fff;
+      padding: 16px 18px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hdr-icon {
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .hdr-title { font-size: 16px; font-weight: 700; line-height: 1.1; }
+    .hdr-sub   { font-size: 11px; opacity: 0.8; margin-top: 1px; }
+
+    /* ── SECTIONS ── */
+    .sections { padding: 14px 14px 80px; display: flex; flex-direction: column; gap: 12px; }
+
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 14px 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.07);
+    }
+
+    .card-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: #6b7280;
+      margin-bottom: 10px;
+    }
+
+    /* ── INPUTS ── */
+    label { display: block; font-size: 12px; color: #374151; margin-bottom: 4px; }
+
+    input[type="text"], input[type="url"] {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #d1d5db;
+      border-radius: 7px;
+      font-size: 13px;
+      color: #111827;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    input[type="text"]:focus, input[type="url"]:focus {
+      border-color: #16a34a;
+      box-shadow: 0 0 0 3px rgba(22,163,74,0.15);
+    }
+
+    .field-hint {
+      font-size: 11px;
+      color: #9ca3af;
+      margin-top: 4px;
+    }
+
+    /* ── SPOTIFY CARD ── */
+    .spotify-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .spotify-info { line-height: 1.4; }
+    .spotify-name { font-weight: 600; font-size: 13px; }
+    .spotify-sub  { font-size: 11px; color: #6b7280; }
+
+    .btn-spotify-connect {
+      flex-shrink: 0;
+      background: #1DB954;
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      padding: 7px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+    .btn-spotify-connect:hover { background: #1aa34a; }
+    .btn-spotify-connect.danger { background: #dc2626; }
+    .btn-spotify-connect.danger:hover { background: #b91c1c; }
+
+    /* ── SERVICE TABS ── */
+    .service-tabs {
+      display: flex;
+      gap: 5px;
+      margin-bottom: 12px;
+    }
+    .svc-tab {
+      flex: 1;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 6px 4px;
+      border: 1px solid #d1d5db;
+      border-radius: 7px;
+      cursor: pointer;
+      color: #374151;
+      background: #f9fafb;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+      user-select: none;
+    }
+    .svc-tab input[type="radio"] { display: none; }
+    .svc-tab:has(input:checked) {
+      background: #22c55e;
+      border-color: #16a34a;
+      color: #fff;
+    }
+    #spotifyAuthSection { margin-top: 2px; }
+
+    /* ── DJ PICKER ── */
+    .dj-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .dj-grid .dj-card:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+    }
+
+    .dj-card {
+      position: relative;
+      border: 2px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 9px 11px;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .dj-card:hover { border-color: #86efac; background: #f0fdf4; }
+    .dj-card.selected {
+      border-color: #16a34a;
+      background: #f0fdf4;
+    }
+    .dj-card input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .dj-emoji { font-size: 22px; line-height: 1; flex-shrink: 0; }
+    .dj-info  { min-width: 0; }
+    .dj-name  { font-size: 12px; font-weight: 700; color: #111827; }
+    .dj-tag   { font-size: 10px; color: #6b7280; line-height: 1.3; margin-top: 1px; }
+
+    /* ── CUSTOM PLAYLISTS ── */
+    .playlist-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .playlist-row:last-child { margin-bottom: 0; }
+    .mood-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .playlist-row label {
+      width: 70px;
+      flex-shrink: 0;
+      margin: 0;
+      font-size: 12px;
+      color: #374151;
+    }
+    .playlist-row input { flex: 1; font-size: 11px; }
+
+    /* ── VIP SENDERS ── */
+    .vip-add-row {
+      display: flex;
+      gap: 7px;
+      margin-bottom: 10px;
+    }
+    .vip-add-row input[type="text"] { flex: 1; }
+    .vip-rating-input {
+      width: 52px;
+      flex-shrink: 0;
+      text-align: center;
+      padding: 8px 6px;
+    }
+    .btn-add {
+      background: #f3f4f6;
+      border: 1px solid #d1d5db;
+      border-radius: 7px;
+      padding: 7px 12px;
+      font-size: 12px;
+      cursor: pointer;
+      white-space: nowrap;
+      color: #374151;
+      font-weight: 600;
+      transition: background 0.1s;
+    }
+    .btn-add:hover { background: #e5e7eb; }
+
+    /* ── KEYWORD CHIPS ── */
+    .kw-list { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+    .kw-chip {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 20px;
+      padding: 2px 6px 2px 9px;
+      font-size: 11px;
+      color: #1e40af;
+      font-weight: 500;
+    }
+    .kw-chip button {
+      background: none;
+      border: none;
+      color: #93c5fd;
+      cursor: pointer;
+      font-size: 12px;
+      line-height: 1;
+      padding: 0;
+    }
+    .kw-chip button:hover { color: #dc2626; }
+    .kw-add-row { display: flex; gap: 7px; margin-top: 10px; }
+    .kw-add-row input[type="text"] { flex: 1; }
+
+    .vip-list { display: flex; flex-wrap: wrap; gap: 6px; }
+    .vip-chip {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: #f0fdf4;
+      border: 1px solid #86efac;
+      border-radius: 20px;
+      padding: 3px 8px 3px 10px;
+      font-size: 11px;
+      color: #166534;
+      font-weight: 500;
+    }
+    .vip-chip button {
+      background: none;
+      border: none;
+      color: #6b7280;
+      cursor: pointer;
+      font-size: 13px;
+      line-height: 1;
+      padding: 0;
+      display: flex;
+      align-items: center;
+    }
+    .vip-chip button:hover { color: #dc2626; }
+    .vip-rating {
+      font-size: 10px;
+      font-weight: 700;
+      background: #16a34a;
+      color: #fff;
+      border-radius: 10px;
+      padding: 1px 5px;
+    }
+    .vip-empty { font-size: 12px; color: #9ca3af; }
+
+    /* ── INFO TOOLTIP ── */
+    .info-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+    .info-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #9ca3af;
+      font-size: 13px;
+      line-height: 1;
+      padding: 0 0 0 5px;
+      vertical-align: middle;
+    }
+    .info-btn:hover { color: #6b7280; }
+    .info-tip {
+      display: none;
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1f2937;
+      color: #f9fafb;
+      font-size: 11px;
+      font-weight: 400;
+      text-transform: none;
+      letter-spacing: 0;
+      line-height: 1.5;
+      padding: 8px 10px;
+      border-radius: 7px;
+      width: 230px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      z-index: 10;
+      pointer-events: none;
+    }
+    .info-tip::before {
+      content: '';
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 5px solid transparent;
+      border-bottom-color: #1f2937;
+    }
+    .info-wrap.open .info-tip,
+    .info-wrap:hover .info-tip { display: block; }
+
+    /* ── MOOD STATUS ── */
+    .mood-status {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 10px 14px;
+      gap: 12px;
+    }
+    .mood-status-left, .mood-status-right {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .mood-status-right { text-align: right; }
+    .mood-status-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #9ca3af;
+    }
+    .mood-status-chip {
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+      background: #d1d5db;
+      border-radius: 12px;
+      padding: 2px 10px;
+      display: inline-block;
+      transition: background 0.3s;
+    }
+    .mood-status-countdown {
+      font-size: 13px;
+      font-weight: 600;
+      color: #374151;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      margin-bottom: 10px;
+    }
+    .how-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      font-size: 12px;
+      color: #374151;
+      line-height: 1.45;
+    }
+    .how-list .how-icon {
+      font-size: 14px;
+      line-height: 1.3;
+      flex-shrink: 0;
+      width: 20px;
+      text-align: center;
+    }
+    .how-moods {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .how-mood-chip {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 20px;
+      color: #fff;
+    }
+
+    /* ── TOGGLE ROW ── */
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .toggle-info { flex: 1; }
+    .toggle-label { font-size: 13px; color: #111827; font-weight: 500; }
+    .toggle-hint  { font-size: 11px; color: #9ca3af; margin-top: 2px; line-height: 1.4; }
+    .toggle { position: relative; width: 36px; height: 20px; flex-shrink: 0; }
+    .toggle input { opacity: 0; width: 0; height: 0; }
+    .toggle-slider {
+      position: absolute;
+      inset: 0;
+      background: #d1d5db;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .toggle-slider::before {
+      content: '';
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      left: 3px;
+      top: 3px;
+      background: #fff;
+      border-radius: 50%;
+      transition: transform 0.2s;
+    }
+    .toggle input:checked + .toggle-slider { background: #16a34a; }
+    .toggle input:checked + .toggle-slider::before { transform: translateX(16px); }
+
+    /* ── RESET BASELINE ── */
+    .btn-reset {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 7px;
+      padding: 8px 14px;
+      font-size: 12px;
+      cursor: pointer;
+      color: #374151;
+      transition: background 0.1s, border-color 0.1s;
+    }
+    .btn-reset:hover { background: #fef2f2; border-color: #fca5a5; color: #dc2626; }
+
+    .playlist-io-row { display: flex; gap: 6px; margin-top: 10px; }
+    .btn-io {
+      flex: 1;
+      font-size: 12px;
+      color: #374151;
+      background: #f9fafb;
+      border: 1px solid #d1d5db;
+      border-radius: 7px;
+      padding: 6px 10px;
+      cursor: pointer;
+      transition: background 0.1s, border-color 0.1s;
+    }
+    .btn-io:hover { background: #f3f4f6; border-color: #9ca3af; }
+    .reset-hint { font-size: 11px; color: #9ca3af; margin-top: 6px; }
+
+    /* ── SCORING CARD ── */
+    .scoring-section { margin-bottom: 14px; }
+    .scoring-section:last-child { margin-bottom: 0; }
+    .scoring-section-title {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      margin-bottom: 8px;
+    }
+    .scoring-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px 0;
+      border-bottom: 1px solid #f9fafb;
+      gap: 8px;
+    }
+    .scoring-row:last-child { border-bottom: none; }
+    .scoring-row-label { font-size: 12px; color: #374151; flex: 1; }
+    .scoring-row-inputs { display: flex; align-items: center; gap: 5px; flex-shrink: 0; }
+    .sc-input {
+      width: 54px;
+      padding: 4px 6px;
+      border: 1px solid #d1d5db;
+      border-radius: 5px;
+      font-size: 12px;
+      text-align: center;
+      color: #111827;
+      outline: none;
+      background: #fff;
+    }
+    .sc-input:focus { border-color: #16a34a; box-shadow: 0 0 0 2px rgba(22,163,74,0.15); }
+    .sc-unit { font-size: 11px; color: #9ca3af; white-space: nowrap; }
+
+    /* ── FOOTER BAR ── */
+    .footer-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-top: 1px solid #e5e7eb;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .btn-save {
+      background: #16a34a;
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      padding: 9px 20px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn-save:hover { background: #15803d; }
+    .save-status {
+      font-size: 12px;
+      color: #6b7280;
+      flex: 1;
+      text-align: right;
+    }
+    .save-status.ok  { color: #16a34a; }
+    .save-status.err { color: #dc2626; }
+
+    /* ── FOOTER LINK ── */
+    .footer-link {
+      text-align: center;
+      padding: 8px 0 4px;
+      font-size: 11px;
+      color: #9ca3af;
+    }
+    .footer-link a { color: #16a34a; text-decoration: none; }
+    .footer-link a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="hdr-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="20" height="20" aria-hidden="true">
+      <path d="M12 3a9 9 0 0 0-9 9v7a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H5v-2a7 7 0 1 1 14 0v2h-2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-7a9 9 0 0 0-9-9z"/>
+    </svg>
+  </div>
+  <div>
+    <div class="hdr-title">Huddo DJ for HCL Verse</div>
+    <div class="hdr-sub">Spotify music for your inbox mood · v1.0.0</div>
+  </div>
+</header>
+
+<div class="sections">
+
+  <!-- ── SETUP ── -->
+  <div class="card">
+    <div class="card-title">Setup</div>
+    <label for="verseUrl">HCL Verse URL</label>
+    <input type="text" id="verseUrl" placeholder="verse.acme.com" autocomplete="off" spellcheck="false">
+    <p class="field-hint">e.g. <em>verse.acme.com</em> or <em>mail.acme.com/verse</em></p>
+  </div>
+
+  <!-- ── MUSIC SERVICE ── -->
+  <div class="card">
+    <div class="card-title">Music Service</div>
+    <div class="service-tabs">
+      <label class="svc-tab"><input type="radio" name="musicService" value="spotify" checked> Spotify</label>
+      <label class="svc-tab"><input type="radio" name="musicService" value="applemusic"> Apple Music</label>
+      <label class="svc-tab"><input type="radio" name="musicService" value="youtubemusic"> YouTube Music</label>
+    </div>
+    <div id="spotifyAuthSection">
+      <div class="spotify-row">
+        <div class="spotify-info">
+          <div class="spotify-name" id="spotifyName">Not connected</div>
+          <div class="spotify-sub" id="spotifySub">Requires Spotify Premium</div>
+        </div>
+        <button class="btn-spotify-connect" id="btnSpotify">Connect Spotify</button>
+      </div>
+    </div>
+    <p class="field-hint" id="svcUrlHint" style="display:none">Playlists open in a new tab — no account connection needed.</p>
+  </div>
+
+  <!-- ── HOW IT WORKS ── -->
+  <div class="card">
+    <div class="card-title">How Your Email Mood is Detected</div>
+
+    <!-- Live mood status -->
+    <div class="mood-status" id="moodStatus">
+      <div class="mood-status-left">
+        <span class="mood-status-label">Current mood</span>
+        <span class="mood-status-chip" id="moodStatusChip">—</span>
+      </div>
+      <div class="mood-status-right">
+        <span class="mood-status-label">Next check</span>
+        <span class="mood-status-countdown" id="moodCountdown">—</span>
+      </div>
+    </div>
+
+    <div class="toggle-row" style="margin-top:14px; border-top:1px solid #f3f4f6; padding-top:14px">
+      <div class="toggle-info">
+        <div class="toggle-label">Auto-change playlist</div>
+        <div class="toggle-hint">When on, the DJ switches playlist automatically as your calculated email mood changes.</div>
+      </div>
+      <label class="toggle">
+        <input type="checkbox" id="autoChange">
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+    <p class="field-hint" style="margin-top:10px">When off, the mood is still calculated in the background — the circle button will show a coloured ring in the suggested mood colour to prompt you to switch manually.</p>
+    <div id="howDetails" style="margin-top:14px; border-top:1px solid #f3f4f6; padding-top:14px">
+      <ul class="how-list">
+        <li><span class="how-icon">📬</span><span>Huddo DJ for HCL Verse watches your HCL Verse inbox and scores it every two minutes based on what it finds.</span></li>
+        <li><span class="how-icon">🔢</span><span><strong>Unread count</strong> — compared against your personal baseline to detect unusual spikes.</span></li>
+        <li><span class="how-icon">⚠️</span><span><strong>Urgent keywords</strong> — subject lines containing words like "urgent", "ASAP", or "deadline" add to the score.</span></li>
+        <li><span class="how-icon">🚩</span><span><strong>Flagged emails</strong> — high-importance messages raise the score further.</span></li>
+        <li><span class="how-icon">⚡</span><span><strong>Arrival rate</strong> — a sudden burst of emails in a short window pushes the mood higher.</span></li>
+        <li><span class="how-icon">⭐</span><span><strong>VIP senders</strong> — emails from contacts you designate below carry extra weight.</span></li>
+      </ul>
+      <p class="field-hint">The combined score maps to one of five moods, and your DJ picks the right playlist automatically:</p>
+      <div class="how-moods">
+        <span class="how-mood-chip" style="background:#22c55e">Zen</span>
+        <span class="how-mood-chip" style="background:#3b82f6">Flowing</span>
+        <span class="how-mood-chip" style="background:#f59e0b">Focused</span>
+        <span class="how-mood-chip" style="background:#f97316">Charged</span>
+        <span class="how-mood-chip" style="background:#ef4444">Emergency</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SCORING WEIGHTS ── -->
+  <div class="card">
+    <div class="card-title">Scoring Weights</div>
+
+    <div class="scoring-section">
+      <div class="scoring-section-title">Signal Weights</div>
+      <div class="scoring-row">
+        <span class="scoring-row-label">Base score
+          <span class="info-wrap"><button class="info-btn" tabindex="-1">&#9432;</button><span class="info-tip">The starting point before any signals are applied. 50 = neutral. Lower this (e.g. 35) to make Zen or Flowing your natural resting state when your inbox is quiet.</span></span>
+        </span>
+        <div class="scoring-row-inputs">
+          <input type="number" id="sc_base" class="sc-input" min="0" max="100">
+          <span class="sc-unit">pts</span>
+        </div>
+      </div>
+      <div class="scoring-row">
+        <span class="scoring-row-label">Urgent subject line
+          <span class="info-wrap"><button class="info-btn" tabindex="-1">&#9432;</button><span class="info-tip">Points added per email whose subject contains a trigger keyword (see list below). The total is capped at the max value regardless of how many matching subjects are found.</span></span>
+        </span>
+        <div class="scoring-row-inputs">
+          <input type="number" id="sc_urgentPer" class="sc-input" min="0" max="30">
+          <span class="sc-unit">each, max</span>
+          <input type="number" id="sc_urgentMax" class="sc-input" min="0" max="50">
+          <span class="sc-unit">pts</span>
+        </div>
+      </div>
+      <div style="padding:8px 0 4px">
+        <div style="font-size:11px;color:#6b7280;margin-bottom:2px">Trigger keywords — matched against email subject lines:</div>
+        <div class="kw-list" id="kwList"></div>
+        <div class="kw-add-row">
+          <input type="text" id="kwInput" placeholder="Add a keyword…" autocomplete="off" spellcheck="false">
+          <button class="btn-add" id="btnAddKw">+ Add</button>
+        </div>
+        <button style="font-size:11px;color:#9ca3af;background:none;border:none;cursor:pointer;padding:4px 0 0;text-align:left" id="btnResetKw">Reset to defaults</button>
+      </div>
+      <div class="scoring-row">
+        <span class="scoring-row-label">Flagged / high importance
+          <span class="info-wrap"><button class="info-btn" tabindex="-1">&#9432;</button><span class="info-tip">Points added per flagged or high-importance email visible in your inbox. Capped at the max value. Useful for those who use flags as a personal priority signal.</span></span>
+        </span>
+        <div class="scoring-row-inputs">
+          <input type="number" id="sc_flaggedPer" class="sc-input" min="0" max="30">
+          <span class="sc-unit">each, max</span>
+          <input type="number" id="sc_flaggedMax" class="sc-input" min="0" max="50">
+          <span class="sc-unit">pts</span>
+        </div>
+      </div>
+      <div class="scoring-row">
+        <span class="scoring-row-label">Arrival rate (max)
+          <span class="info-wrap"><button class="info-btn" tabindex="-1">&#9432;</button><span class="info-tip">Points awarded based on how many new emails arrived in the last 30 minutes. Scaled across 5 buckets: 0 emails = 0 pts, 1–2 = 20%, 3–5 = 47%, 6–10 = 73%, 11+ = 100% of max.</span></span>
+        </span>
+        <div class="scoring-row-inputs">
+          <input type="number" id="sc_arrivalMax" class="sc-input" min="0" max="30">
+          <span class="sc-unit">pts</span>
+        </div>
+      </div>
+      <div class="scoring-row">
+        <span class="scoring-row-label">VIP senders (max total)
+          <span class="info-wrap"><button class="info-btn" tabindex="-1">&#9432;</button><span class="info-tip">The sum of all VIP sender ratings visible in your inbox is capped at this value. Individual sender ratings are set in the VIP Senders card below.</span></span>
+        </span>
+        <div class="scoring-row-inputs">
+          <input type="number" id="sc_vipMax" class="sc-input" min="0" max="50">
+          <span class="sc-unit">pts</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scoring-section" style="border-top:1px solid #f3f4f6;padding-top:12px">
+      <div class="scoring-section-title">Time Modifiers</div>
+      <div class="scoring-row">
+        <span class="scoring-row-label">Weekend / late Friday
+          <span class="info-wrap"><button class="info-btn" tabindex="-1">&#9432;</button><span class="info-tip">Applied on Saturday, Sunday, and Friday after 3pm. Use a negative value to reduce the mood score — reflecting a naturally quieter pace at these times.</span></span>
+        </span>
+        <div class="scoring-row-inputs">
+          <input type="number" id="sc_timeWeekend" class="sc-input" min="-30" max="30">
+          <span class="sc-unit">pts</span>
+        </div>
+      </div>
+      <div class="scoring-row">
+        <span class="scoring-row-label">Friday lunchtime
+          <span class="info-wrap"><button class="info-btn" tabindex="-1">&#9432;</button><span class="info-tip">Applied on Friday between noon and 3pm — the wind-down window before the weekend. A smaller reduction than late Friday.</span></span>
+        </span>
+        <div class="scoring-row-inputs">
+          <input type="number" id="sc_timeFriLunch" class="sc-input" min="-30" max="30">
+          <span class="sc-unit">pts</span>
+        </div>
+      </div>
+      <div class="scoring-row">
+        <span class="scoring-row-label">Monday morning (8–10am)
+          <span class="info-wrap"><button class="info-btn" tabindex="-1">&#9432;</button><span class="info-tip">Applied on Monday between 8am and 10am — the typical post-weekend inbox rush. A positive value raises the mood score to reflect this naturally busier period.</span></span>
+        </span>
+        <div class="scoring-row-inputs">
+          <input type="number" id="sc_timeMonMorn" class="sc-input" min="-30" max="30">
+          <span class="sc-unit">pts</span>
+        </div>
+      </div>
+      <div class="scoring-row">
+        <span class="scoring-row-label">Monday mid-morning (10am–noon)
+          <span class="info-wrap"><button class="info-btn" tabindex="-1">&#9432;</button><span class="info-tip">Applied on Monday between 10am and noon — still busier than average but calming down from the morning rush.</span></span>
+        </span>
+        <div class="scoring-row-inputs">
+          <input type="number" id="sc_timeMonMid" class="sc-input" min="-30" max="30">
+          <span class="sc-unit">pts</span>
+        </div>
+      </div>
+      <div class="scoring-row">
+        <span class="scoring-row-label">Outside office hours
+          <span class="info-wrap"><button class="info-btn" tabindex="-1">&#9432;</button><span class="info-tip">Applied before 8am and after 6pm on weekdays. A small reduction since inbox activity is typically lower outside core hours.</span></span>
+        </span>
+        <div class="scoring-row-inputs">
+          <input type="number" id="sc_timeAfter" class="sc-input" min="-30" max="30">
+          <span class="sc-unit">pts</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scoring-section" style="border-top:1px solid #f3f4f6;padding-top:12px">
+      <div class="scoring-section-title">Mood Thresholds <span style="font-weight:400;text-transform:none;letter-spacing:0">(score 0–100)</span>
+        <span class="info-wrap"><button class="info-btn" tabindex="-1">&#9432;</button><span class="info-tip">The final score maps to a mood based on these boundaries. e.g. with defaults (20/40/60/80): score 35 = Flowing, score 65 = Charged. Raise a threshold to make that mood harder to reach; lower it to make it easier.</span></span>
+      </div>
+      <div class="scoring-row">
+        <span class="scoring-row-label">🟢 Zen up to</span>
+        <div class="scoring-row-inputs">
+          <input type="number" id="sc_tZen" class="sc-input" min="1" max="99">
+        </div>
+      </div>
+      <div class="scoring-row">
+        <span class="scoring-row-label">🔵 Flowing up to</span>
+        <div class="scoring-row-inputs">
+          <input type="number" id="sc_tFlowing" class="sc-input" min="1" max="99">
+        </div>
+      </div>
+      <div class="scoring-row">
+        <span class="scoring-row-label">🟡 Focused up to</span>
+        <div class="scoring-row-inputs">
+          <input type="number" id="sc_tFocused" class="sc-input" min="1" max="99">
+        </div>
+      </div>
+      <div class="scoring-row">
+        <span class="scoring-row-label">🟠 Charged up to</span>
+        <div class="scoring-row-inputs">
+          <input type="number" id="sc_tCharged" class="sc-input" min="1" max="99">
+        </div>
+      </div>
+      <p class="field-hint">Scores above the Charged threshold = 🔴 Emergency.</p>
+    </div>
+
+    <div style="margin-top:12px;border-top:1px solid #f3f4f6;padding-top:12px">
+      <button class="btn-reset" id="btnResetScoring">Reset to Defaults</button>
+    </div>
+  </div>
+
+  <!-- ── YOUR DJ ── -->
+  <div class="card">
+    <div class="card-title">Your DJ</div>
+    <div class="dj-grid" id="djGrid">
+      <!-- populated by popup.js -->
+    </div>
+  </div>
+
+  <!-- ── CUSTOM PLAYLISTS ── -->
+  <div class="card">
+    <div class="card-title" id="playlistCardTitle">Custom Playlists <span style="font-weight:400;text-transform:none;color:#9ca3af">(optional)</span></div>
+    <div id="playlistInputs">
+      <!-- populated by popup.js -->
+    </div>
+    <p class="field-hint" id="playlistHint">Paste a Spotify playlist URI (e.g. <em>spotify:playlist:…</em>) or leave blank for defaults.</p>
+    <div class="playlist-io-row">
+      <button class="btn-io" id="btnExportPlaylists">↓ Export playlists</button>
+      <button class="btn-io" id="btnImportPlaylists">↑ Import playlists</button>
+      <input type="file" id="importFileInput" accept=".json" style="display:none">
+    </div>
+  </div>
+
+  <!-- ── VIP SENDERS ── -->
+  <div class="card">
+    <div class="card-title">
+      VIP Senders
+      <span class="info-wrap" id="vipInfoWrap">
+        <button class="info-btn" id="vipInfoBtn" aria-label="What are VIP senders?">&#9432;</button>
+        <span class="info-tip" role="tooltip">
+          Emails from VIP senders carry extra weight when calculating your inbox mood.
+          Adding a busy contact here means their emails push the mood higher — so the DJ reacts faster when they're in your inbox.
+        </span>
+      </span>
+    </div>
+    <div class="vip-add-row">
+      <input type="text" id="vipInput" placeholder="Name, email, or domain…" autocomplete="off">
+      <input type="number" id="vipRating" class="vip-rating-input" min="1" max="30" value="5" title="Mood score contribution (1–30)">
+      <button class="btn-add" id="btnAddVip">+ Add</button>
+    </div>
+    <p class="field-hint" style="margin-bottom:10px">Rating 1–30 added to the mood score when an email from this sender is in your inbox.</p>
+    <div class="vip-list" id="vipList">
+      <span class="vip-empty" id="vipEmpty">No VIPs yet</span>
+    </div>
+  </div>
+
+  <!-- ── ADVANCED ── -->
+  <div class="card">
+    <div class="card-title">Advanced</div>
+    <button class="btn-reset" id="btnReset">Reset Inbox Baseline</button>
+    <p class="reset-hint">Clears the learned "normal" unread count — useful after returning from leave.</p>
+  </div>
+
+  <div class="footer-link">
+    Created for fun by the team at <a href="https://www.huddo.com" target="_blank" rel="noopener">huddo.com</a>
+  </div>
+
+</div><!-- /sections -->
+
+<div class="footer-bar">
+  <span class="save-status" id="saveStatus" style="text-align:center;flex:1"></span>
+</div>
+
+<script src="popup.js"></script>
+</body>
+</html>
