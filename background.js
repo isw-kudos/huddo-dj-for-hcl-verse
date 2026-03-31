@@ -148,7 +148,7 @@ async function playPlaylist(uri) {
     const body   = (() => { try { return JSON.parse(raw); } catch { return {}; } })();
     const reason = body?.error?.reason || '';
     const msg    = body?.error?.message || '';
-    console.error('[EmailDJ] Spotify error', res.status, reason, msg, raw);
+    console.error('[EmailDJ] Spotify error', res.status, reason, msg);
     if (res.status === 403 && reason === 'PREMIUM_REQUIRED') {
       throw new Error('Spotify Premium is required for playback control.');
     }
