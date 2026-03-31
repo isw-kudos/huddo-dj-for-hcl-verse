@@ -1,0 +1,2 @@
+# Extension signing key — keep this private, never commit
+*.pem
