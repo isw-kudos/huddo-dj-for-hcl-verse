@@ -1160,45 +1160,6 @@ if (window.__hdjLoaded) {
     }
   });
 
-  // ── DEBUG HELPERS (browser console) ───────────────────────────────────
-  // __hdjDebug()        — log all signal values and current score breakdown
-  // __hdjSetMood(mood)  — force a mood ('zen','flowing','focused','charged','emergency')
-
-  window.__hdjDebug = function() {
-    const unread   = getUnreadCount();
-    const urgent   = getUrgentSubjectCount();
-    const flagged  = getFlaggedCount();
-    const vip      = getVIPHits();
-    const timeMod  = getTimeModifier();
-    const arrRate  = getArrivalRateScore();
-    const delta    = getUnreadDeltaScore(unread);
-    const sc    = settings.scoring;
-    const score = Math.max(0, Math.min(100,
-      sc.base + delta + arrRate + Math.min(sc.urgentMax, urgent * sc.urgentPer) + Math.min(sc.flaggedMax, flagged * sc.flaggedPer) + vip + timeMod
-    ));
-    console.table({
-      'Unread count':       unread,
-      'Baseline avg':       baseline.avg?.toFixed(1) ?? 'n/a',
-      'Baseline samples':   baseline.samples,
-      'Unread delta score': delta,
-      'Arrival rate score': arrRate,
-      'Urgent subjects':    urgent,
-      'Flagged emails':     flagged,
-      'VIP hits':           vip,
-      'Time modifier':      timeMod,
-      '── Total score':     score,
-      '── Mood':            currentMood,
-    });
-    return { unread, urgent, flagged, vip, timeMod, arrRate, delta, score, mood: currentMood };
-  };
-
-  window.__hdjSetMood = function(mood) {
-    const valid = ['zen','flowing','focused','charged','emergency'];
-    if (!valid.includes(mood)) { console.warn('HDJ: valid moods are', valid); return; }
-    currentMood = mood;
-    updateToggleColor(mood);
-    console.log('HDJ: mood forced to', mood);
-  };
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
