@@ -944,7 +944,8 @@ if (window.__hdjLoaded) {
           // Open the full service page in a compact popup window.
           // window.open() from a click handler carries the user gesture,
           // allowing the service's own player to autoplay on load.
-          window.open(uri, 'hdj-player', 'popup,width=700,height=500');
+          const autoplayUrl = uri + (uri.includes('?') ? '&' : '?') + 'autoplay=1';
+          window.open(autoplayUrl, 'hdj-player', 'popup,width=700,height=500');
           playBtn.textContent = getStrings().nowPlaying;
         }
       });
