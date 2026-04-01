@@ -1025,16 +1025,19 @@ if (window.__hdjLoaded) {
       const uri = resolvePlaylist(settings.dj, mood);
       if (!uri) return; // no playlist configured for this mood/service
       const autoplayUri = uri + (uri.includes('?') ? '&' : '?') + 'autoplay=1';
-      _api.runtime.sendMessage({ type: 'URL_PLAY', url: autoplayUri }, res => {
-        if (res?.ok) {
-          lastAcknowledgedMood = mood;
-          const btn = document.getElementById('hdj-toggle');
-          if (btn) {
-            btn.setAttribute('data-mood', mood);
-            btn.style.setProperty('--hdj-ring', 'transparent');
-          }
-        }
-      });
+      // Navigate the existing hdj-player popup if open; window.open() on a named
+      // window that already exists is navigation (not a popup) so it isn't blocked.
+      // If the popup is closed, fall back to opening a new tab.
+      const popupWin = window.open(autoplayUri, 'hdj-player', 'popup,width=700,height=500');
+      if (!popupWin) {
+        _api.runtime.sendMessage({ type: 'URL_PLAY', url: autoplayUri });
+      }
+      lastAcknowledgedMood = mood;
+      const btn = document.getElementById('hdj-toggle');
+      if (btn) {
+        btn.setAttribute('data-mood', mood);
+        btn.style.setProperty('--hdj-ring', 'transparent');
+      }
     } else {
       updateToggleColor(mood);
     }
