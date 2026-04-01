@@ -958,7 +958,8 @@ if (window.__hdjLoaded) {
         const uri = playBtn.dataset.uri;
         const embedUrl = buildEmbedUrl(uri, settings.musicService);
         if (embedUrl) {
-          _api.runtime.sendMessage({ type: 'EMBED_PLAY', url: embedUrl });
+          // window.open() carries the user gesture, allowing autoplay in the popup
+          window.open(embedUrl, 'hdj-player', 'popup,width=400,height=200');
           playBtn.textContent = getStrings().nowPlaying;
         } else {
           // Fallback: open in new tab for unrecognised URL formats
@@ -1040,10 +1041,7 @@ if (window.__hdjLoaded) {
       // Auto-switch playlist to match new mood
       const uri = resolvePlaylist(settings.dj, mood);
       if (!uri) return; // no playlist configured for this mood/service
-      const embedUrl = buildEmbedUrl(uri, settings.musicService);
-      const msgType = embedUrl ? 'EMBED_PLAY' : 'URL_PLAY';
-      const msgUrl  = embedUrl || uri;
-      _api.runtime.sendMessage({ type: msgType, url: msgUrl }, res => {
+      _api.runtime.sendMessage({ type: 'URL_PLAY', url: uri }, res => {
         if (res?.ok) {
           lastAcknowledgedMood = mood;
           const btn = document.getElementById('hdj-toggle');
