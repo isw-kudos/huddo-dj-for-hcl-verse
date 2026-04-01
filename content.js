@@ -353,22 +353,6 @@ if (window.__hdjLoaded) {
     return (svcDefaults[djId] || {})[mood] || '';
   }
 
-  function buildEmbedUrl(url, service) {
-    if (!url) return null;
-    if (service === 'spotify') {
-      const m = url.match(/open\.spotify\.com\/playlist\/([A-Za-z0-9]+)/);
-      return m ? `https://open.spotify.com/embed/playlist/${m[1]}?utm_source=generator&autoplay=1` : null;
-    }
-    if (service === 'applemusic') {
-      return url.replace('https://music.apple.com', 'https://embed.music.apple.com');
-    }
-    if (service === 'youtubemusic') {
-      const m = url.match(/[?&]list=([^&]+)/);
-      return m ? `https://www.youtube.com/embed/videoseries?list=${m[1]}&autoplay=1` : null;
-    }
-    return null;
-  }
-
   // ── DJ PERSONALITIES ───────────────────────────────────────────────────
 
   const DJS = {
@@ -956,14 +940,12 @@ if (window.__hdjLoaded) {
     if (playBtn) {
       playBtn.addEventListener('click', () => {
         const uri = playBtn.dataset.uri;
-        const embedUrl = buildEmbedUrl(uri, settings.musicService);
-        if (embedUrl) {
-          // window.open() carries the user gesture, allowing autoplay in the popup
-          window.open(embedUrl, 'hdj-player', 'popup,width=400,height=200');
+        if (uri) {
+          // Open the full service page in a compact popup window.
+          // window.open() from a click handler carries the user gesture,
+          // allowing the service's own player to autoplay on load.
+          window.open(uri, 'hdj-player', 'popup,width=700,height=500');
           playBtn.textContent = getStrings().nowPlaying;
-        } else {
-          // Fallback: open in new tab for unrecognised URL formats
-          _api.runtime.sendMessage({ type: 'URL_PLAY', url: uri });
         }
       });
     }
