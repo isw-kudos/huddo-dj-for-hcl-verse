@@ -944,12 +944,7 @@ if (window.__hdjLoaded) {
           // Open the full service page in a compact popup window.
           // window.open() from a click handler carries the user gesture,
           // allowing the service's own player to autoplay on load.
-          // Convert YouTube Music URLs to YouTube embed for autoplay support
-          // music.youtube.com/playlist?list=ID → www.youtube.com/embed/videoseries?list=ID&autoplay=1
-          let playUrl = uri;
-          const ytMatch = uri.match(/music\.youtube\.com\/playlist\?.*list=([^&]+)/);
-          if (ytMatch) playUrl = `https://www.youtube.com/embed/videoseries?list=${ytMatch[1]}`;
-          const autoplayUrl = playUrl + (playUrl.includes('?') ? '&' : '?') + 'autoplay=1';
+          const autoplayUrl = uri + (uri.includes('?') ? '&' : '?') + 'autoplay=1';
           window.open(autoplayUrl, 'hdj-player', 'popup,width=700,height=500');
           playBtn.textContent = getStrings().nowPlaying;
         }
