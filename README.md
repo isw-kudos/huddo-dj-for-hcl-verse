@@ -2,7 +2,7 @@
 
 The right music for your inbox mood — automatically. Huddo DJ reads your HCL Verse inbox, calculates a mood score in real time, and queues up the perfect playlist on Spotify, Apple Music, or YouTube Music.
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue)
+![Version](https://img.shields.io/badge/version-1.2.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Platform](https://img.shields.io/badge/platform-Chrome%20%7C%20Firefox-yellow)
 ![HCL Verse](https://img.shields.io/badge/HCL%20Verse-compatible-blueviolet)
@@ -16,7 +16,7 @@ The right music for your inbox mood — automatically. Huddo DJ reads your HCL V
 
 A floating DJ button sits in the corner of your HCL Verse inbox. Every two minutes it scans your inbox — counting urgent subjects, flagged emails, recent message volume, and VIP senders — and calculates a **mood score**. That score maps to one of five moods, and each mood has a curated playlist ready to go for whichever DJ persona you've chosen.
 
-Click the button to open the panel. Your DJ greets you, reads the room, and offers to play. One click sends the playlist to Spotify (playing in the background on any active device), or opens it in Apple Music or YouTube Music.
+Click the button to open the panel. Your DJ greets you, reads the room, and offers to play. One click opens the playlist in a compact popup window — Spotify, Apple Music, or YouTube Music — with autoplay where the service supports it.
 
 ---
 
@@ -24,7 +24,8 @@ Click the button to open the panel. Your DJ greets you, reads the room, and offe
 
 - **5 moods** — Zen 🟢, Flowing 🔵, Focused 🟡, Charged 🟠, Emergency 🔴 — each with its own colour, quote, and playlist
 - **8 DJ personas** — each with a distinct musical style and personality
-- **3 music services** — Spotify (background playback via API), Apple Music, YouTube Music (opens in a new tab)
+- **3 music services** — Spotify, Apple Music, YouTube Music — each opens in a compact popup window with autoplay (Spotify & Apple Music support `?autoplay=1`; YouTube Music opens the playlist directly)
+- **Auto Change Playlist** — optionally switches to the matching playlist automatically when your mood changes (Spotify and Apple Music only)
 - **Intelligent scoring** — weighted signals including urgent subject keywords, flagged emails, recent email volume, VIP sender ratings, and time-of-day adjustments
 - **Fully configurable scoring** — tune every weight and mood threshold to match your working style
 - **Custom playlists** — override the default playlist for any DJ × mood combination
@@ -54,11 +55,11 @@ Each DJ has a distinct personality and a full set of curated playlists across al
 
 ## Music Services
 
-| Service | How it works | Account needed? |
-|---|---|---|
-| **Spotify** | Controls playback via the Spotify Web API — music plays in the background on your active Spotify device | Yes — Spotify account required (Premium for playback control) |
-| **Apple Music** | Opens the playlist in a new Apple Music tab | Apple Music subscription |
-| **YouTube Music** | Opens the playlist in a new YouTube Music tab | Free or Premium |
+| Service | How it works | Autoplay | Account needed? |
+|---|---|---|---|
+| **Spotify** | Opens the playlist in a compact popup window with `?autoplay=1` | ✅ Yes | Free or Premium |
+| **Apple Music** | Opens the playlist in a compact popup window with `?autoplay=1` | ✅ Yes | Apple Music subscription |
+| **YouTube Music** | Opens the playlist in a compact popup window | ❌ No URL-based autoplay | Free or Premium |
 
 Select your music service in the **Music Service** card in the extension settings.
 
@@ -124,11 +125,10 @@ git clone https://github.com/isw-kudos/huddo-dj-for-hcl-verse.git
 1. Click the **Huddo DJ** icon in the toolbar
 2. Enter your **HCL Verse URL** (e.g. `mail.yourcompany.com/verse`)
 3. Choose your **music service** (Spotify, Apple Music, or YouTube Music)
-4. If using Spotify, click **Connect Spotify** and sign in
-5. Choose a **DJ** and review the default playlists — customise any you like
-6. Adjust **scoring weights** and **mood thresholds** if you want to tune the sensitivity
-7. Click **Save settings**
-8. Refresh your Verse tab
+4. Choose a **DJ** and review the default playlists — customise any you like
+5. Adjust **scoring weights** and **mood thresholds** if you want to tune the sensitivity
+6. Click **Save settings**
+7. Refresh your Verse tab
 
 ### 4. Use it
 
@@ -140,27 +140,11 @@ If you also have [Huddo AI Assistant for HCL Verse](https://github.com/isw-kudos
 
 ---
 
-## Connecting Spotify
-
-The extension uses Spotify's PKCE OAuth flow — no client secret is ever stored. Here's what happens when you click **Connect Spotify**:
-
-1. A Spotify login window opens in your browser
-2. You authorise the extension with `user-read-playback-state` and `user-modify-playback-state` scopes
-3. The access token is stored locally in Chrome extension storage — it never leaves your browser
-
-**Requirements:**
-- A Spotify account (Premium is required for remote playback control via the API)
-- Spotify must be open and playing on at least one device before clicking Play — the extension targets your currently active device
-
-If you see _"No active Spotify device found"_, open the Spotify app on any device and play something, then try again.
-
----
-
 ## Custom Playlists
 
 In the **Custom Playlists** settings card, you can override the default playlist for any DJ and mood combination:
 
-- **Spotify**: paste a Spotify playlist URI — e.g. `spotify:playlist:37i9dQZF1DWZeKCadgRdKQ`
+- **Spotify**: paste a Spotify playlist URL — e.g. `https://open.spotify.com/playlist/37i9dQZF1DWZeKCadgRdKQ`
 - **Apple Music**: paste an Apple Music playlist URL — e.g. `https://music.apple.com/us/playlist/…`
 - **YouTube Music**: paste a YouTube Music playlist URL — e.g. `https://music.youtube.com/playlist?list=…`
 
@@ -175,7 +159,7 @@ Use the **Export playlists** button to download your custom playlists as a JSON 
 ```
 huddo-dj-for-hcl-verse/
 ├── manifest.json      # Extension config & permissions
-├── background.js      # Spotify PKCE OAuth, Spotify Web API playback, URL-launch for Apple Music / YouTube Music
+├── background.js      # URL-launch handler for Spotify, Apple Music, and YouTube Music; re-injection on reload
 ├── content.js         # Mood scoring engine, floating panel UI, DJ personas, playlist defaults
 ├── styles.css         # Panel and toggle button styling
 ├── popup.html         # Settings popup
@@ -195,7 +179,6 @@ huddo-dj-for-hcl-verse/
 
 - No data is collected, transmitted, or stored outside your browser
 - The mood score is calculated entirely locally by reading your visible inbox — nothing is sent anywhere automatically
-- Spotify tokens are stored locally in Chrome extension storage and used only to call the Spotify API on your behalf when you click Play
 - The extension activates only on the Verse domain you configure
 - No analytics, no tracking, no telemetry of any kind
 
@@ -242,8 +225,6 @@ To contribute:
 This extension is an independent, open-source project created by [ISW Development Pty Ltd](https://isw.net.au). It is **not affiliated with, endorsed by, or in any way connected to HCL Software, Spotify, Apple, Google, or any other company** whose products it integrates with. All trademarks are the property of their respective owners.
 
 **Use at your own risk.** This software is provided "as is", without warranty of any kind — express or implied — including but not limited to warranties of merchantability, fitness for a particular purpose, or non-infringement. The authors accept no liability for any loss or damage arising from its use.
-
-**Spotify Premium:** Playback control via the Spotify Web API requires a Spotify Premium subscription. The extension does not circumvent any Spotify terms of service — it uses the official, documented API with user-granted OAuth permissions.
 
 ---
 
