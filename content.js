@@ -413,6 +413,7 @@ if (window.__hdjLoaded) {
   }
 
   function shouldActivate() {
+    if (location.hash.startsWith('#/tearoff/')) return false;
     if (!settings.verseUrl) return false;
     const normalised     = settings.verseUrl.replace(/^https?:\/\//, '');
     const slashIdx       = normalised.indexOf('/');
