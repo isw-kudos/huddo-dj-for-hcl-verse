@@ -922,6 +922,18 @@ if (window.__hdjLoaded) {
   function wirePanel(panel, mood, playlistUri) {
     panel.querySelector('.hdj-close').addEventListener('click', closePanel);
 
+    // Close panel when clicking outside it
+    document.addEventListener('click', function onOutsideClick(e) {
+      if (!panel.isConnected) {
+        document.removeEventListener('click', onOutsideClick);
+        return;
+      }
+      if (!panel.contains(e.target)) {
+        closePanel();
+        document.removeEventListener('click', onOutsideClick);
+      }
+    });
+
     // Mood selector — re-opens panel at chosen mood
     panel.querySelectorAll('.hdj-mood-btn').forEach(btn => {
       btn.addEventListener('click', () => openPanel(btn.dataset.mood));
