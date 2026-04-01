@@ -350,3 +350,14 @@
   border-bottom: 2px solid rgba(255,255,255,0.4);
   border-radius: 0 0 3px 0;
 }
+
+/* ── EMBED PLAYER ──────────────────────────────────────────────────────── */
+
+.hdj-embed {
+  display: block;
+  width: 100%;
+  height: 152px;
+  border: none;
+  border-radius: 8px;
+  margin-top: 8px;
+}

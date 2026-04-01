@@ -17,6 +17,7 @@ if (window.__hdjLoaded) {
       noPlaylist:   'No playlist set for this mood — add one in settings',
       close:        'Close',
       starting:     'Starting\u2026',
+      nowPlaying:   'Now Playing \u266b',
       openingIn:    svc => `\u266b Opening in ${svc}`,
       couldNotOpen: svc => `Could not open ${svc} \u2014 please try again.`,
       connFailed:   'Connection failed \u2014 please try again.',
@@ -27,6 +28,7 @@ if (window.__hdjLoaded) {
       noPlaylist:   'No playlist set for this mood \u2014 add one in settings',
       close:        'Close',
       starting:     'Starting\u2026',
+      nowPlaying:   'Now Playing \u266b',
       openingIn:    svc => `\u266b Opening in ${svc}`,
       couldNotOpen: svc => `Could not open ${svc} \u2014 please try again.`,
       connFailed:   'Connection failed \u2014 please try again.',
@@ -37,6 +39,7 @@ if (window.__hdjLoaded) {
       noPlaylist:   'No playlist set for this mood \u2014 add one in settings',
       close:        'Close',
       starting:     'Starting\u2026',
+      nowPlaying:   'Now Playing \u266b',
       openingIn:    svc => `\u266b Opening in ${svc}`,
       couldNotOpen: svc => `Could not open ${svc} \u2014 please try again.`,
       connFailed:   'Connection failed \u2014 please try again.',
@@ -48,7 +51,7 @@ if (window.__hdjLoaded) {
       noPlaylist:   'Keine Playlist f\u00fcr diese Stimmung \u2014 eine in den Einstellungen hinzuf\u00fcgen',
       close:        'Schlie\u00dfen',
       starting:     'Wird gestartet\u2026',
-
+      nowPlaying:   'Wird gespielt \u266b',
       openingIn:    svc => `\u266b \u00d6ffne in ${svc}`,
       couldNotOpen: svc => `${svc} konnte nicht ge\u00f6ffnet werden \u2014 bitte erneut versuchen.`,
       connFailed:   'Verbindung fehlgeschlagen \u2014 bitte erneut versuchen.',
@@ -60,6 +63,7 @@ if (window.__hdjLoaded) {
       noPlaylist:   'Aucune playlist d\u00e9finie pour cette humeur \u2014 ajoutez-en une dans les param\u00e8tres',
       close:        'Fermer',
       starting:     'D\u00e9marrage\u2026',
+      nowPlaying:   'En cours de lecture \u266b',
       connecting:   'Connexion\u2026',
       playingSpotify: '\u266b Lecture sur Spotify',
       openingIn:    svc => `\u266b Ouverture dans ${svc}`,
@@ -73,6 +77,7 @@ if (window.__hdjLoaded) {
       noPlaylist:   'Nessuna playlist impostata per questo umore \u2014 aggiungine una nelle impostazioni',
       close:        'Chiudi',
       starting:     'Avvio\u2026',
+      nowPlaying:   'In riproduzione \u266b',
       connecting:   'Connessione\u2026',
       playingSpotify: '\u266b In riproduzione su Spotify',
       openingIn:    svc => `\u266b Apertura in ${svc}`,
@@ -86,6 +91,7 @@ if (window.__hdjLoaded) {
       noPlaylist:   'No hay playlist para este estado de \u00e1nimo \u2014 a\u00f1ade una en ajustes',
       close:        'Cerrar',
       starting:     'Iniciando\u2026',
+      nowPlaying:   'Reproduciendo \u266b',
       connecting:   'Conectando\u2026',
       playingSpotify: '\u266b Reproduciendo en Spotify',
       openingIn:    svc => `\u266b Abriendo en ${svc}`,
@@ -99,6 +105,7 @@ if (window.__hdjLoaded) {
       noPlaylist:   'Nenhuma playlist definida para este humor \u2014 adicione uma nas configura\u00e7\u00f5es',
       close:        'Fechar',
       starting:     'Iniciando\u2026',
+      nowPlaying:   'Reproduzindo \u266b',
       connecting:   'Conectando\u2026',
       playingSpotify: '\u266b Reproduzindo no Spotify',
       openingIn:    svc => `\u266b Abrindo no ${svc}`,
@@ -112,6 +119,7 @@ if (window.__hdjLoaded) {
       noPlaylist:   'Geen afspeellijst ingesteld voor deze stemming \u2014 voeg er een toe in de instellingen',
       close:        'Sluiten',
       starting:     'Starten\u2026',
+      nowPlaying:   'Wordt afgespeeld \u266b',
       connecting:   'Verbinden\u2026',
       playingSpotify: '\u266b Afspelen op Spotify',
       openingIn:    svc => `\u266b Openen in ${svc}`,
@@ -125,6 +133,7 @@ if (window.__hdjLoaded) {
       noPlaylist:   '\u041f\u043b\u0435\u0439\u043b\u0438\u0441\u0442 \u043d\u0435 \u0437\u0430\u0434\u0430\u043d \u0434\u043b\u044f \u044d\u0442\u043e\u0433\u043e \u043d\u0430\u0441\u0442\u0440\u043e\u0435\u043d\u0438\u044f \u2014 \u0434\u043e\u0431\u0430\u0432\u044c\u0442\u0435 \u0435\u0433\u043e \u0432 \u043d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0430\u0445',
       close:        '\u0417\u0430\u043a\u0440\u044b\u0442\u044c',
       starting:     '\u0417\u0430\u043f\u0443\u0441\u043a\u2026',
+      nowPlaying:   '\u041f\u0440\u043e\u0438\u0433\u0440\u044b\u0432\u0430\u0435\u0442\u0441\u044f \u266b',
       connecting:   '\u041f\u043e\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u0435\u2026',
       playingSpotify: '\u266b \u0412\u043e\u0441\u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0438\u0442\u0441\u044f \u0432 Spotify',
       openingIn:    svc => `\u266b \u041e\u0442\u043a\u0440\u044b\u0442\u0438\u0435 \u0432 ${svc}`,
@@ -138,6 +147,7 @@ if (window.__hdjLoaded) {
       noPlaylist:   'Brak playlisty dla tego nastroju \u2014 dodaj j\u0105 w ustawieniach',
       close:        'Zamknij',
       starting:     'Uruchamianie\u2026',
+      nowPlaying:   'Odtwarzanie \u266b',
       connecting:   '\u0141\u0105czenie\u2026',
       playingSpotify: '\u266b Odtwarzanie na Spotify',
       openingIn:    svc => `\u266b Otwieranie w ${svc}`,
@@ -151,6 +161,7 @@ if (window.__hdjLoaded) {
       noPlaylist:   '\u017d\u00e1dn\u00fd playlist pro tuto n\u00e1ladu \u2014 p\u0159idejte ho v nastaven\u00ed',
       close:        'Zav\u0159\u00edt',
       starting:     'Spou\u0161t\u00edm\u2026',
+      nowPlaying:   'P\u0159ehr\u00e1v\u00e1 se \u266b',
       connecting:   'P\u0159ipojuji\u2026',
       playingSpotify: '\u266b P\u0159ehr\u00e1v\u00e1n\u00ed na Spotify',
       openingIn:    svc => `\u266b Otev\u00edr\u00e1m v ${svc}`,
@@ -164,6 +175,7 @@ if (window.__hdjLoaded) {
       noPlaylist:   'Nincs lej\u00e1tsz\u00e1si lista ehhez a hangulathoz \u2014 adj hozz\u00e1 egyet a be\u00e1ll\u00edt\u00e1sokban',
       close:        'Bez\u00e1r\u00e1s',
       starting:     'Ind\u00edt\u00e1s\u2026',
+      nowPlaying:   'Lej\u00e1tsz\u00e1s \u266b',
       connecting:   'Csatlakoz\u00e1s\u2026',
       playingSpotify: '\u266b Lej\u00e1tsz\u00e1s a Spotify-on',
       openingIn:    svc => `\u266b Megnyit\u00e1s: ${svc}`,
@@ -177,6 +189,7 @@ if (window.__hdjLoaded) {
       noPlaylist:   '\u3053\u306e\u30e0\u30fc\u30c9\u306e\u30d7\u30ec\u30a4\u30ea\u30b9\u30c8\u304c\u8a2d\u5b9a\u3055\u308c\u3066\u3044\u307e\u305b\u3093 \u2014 \u8a2d\u5b9a\u3067\u8ffd\u52a0\u3057\u3066\u304f\u3060\u3055\u3044',
       close:        '\u9589\u3058\u308b',
       starting:     '\u958b\u59cb\u4e2d\u2026',
+      nowPlaying:   '\u518d\u751f\u4e2d \u266b',
       connecting:   '\u63a5\u7d9a\u4e2d\u2026',
       playingSpotify: '\u266b Spotify\u3067\u518d\u751f\u4e2d',
       openingIn:    svc => `\u266b ${svc}\u3067\u958b\u304f`,
@@ -190,6 +203,7 @@ if (window.__hdjLoaded) {
       noPlaylist:   '\uc774 \uae30\ubd84\uc5d0 \uc124\uc815\ub41c \ud50c\ub808\uc774\ub9ac\uc2a4\ud2b8\uac00 \uc5c6\uc2b5\ub2c8\ub2e4 \u2014 \uc124\uc815\uc5d0\uc11c \ucd94\uac00\ud558\uc138\uc694',
       close:        '\ub2eb\uae30',
       starting:     '\uc2dc\uc791 \uc911\u2026',
+      nowPlaying:   '\uc7ac\uc0dd \uc911 \u266b',
       connecting:   '\uc5f0\uacb0 \uc911\u2026',
       playingSpotify: '\u266b Spotify\uc5d0\uc11c \uc7ac\uc0dd \uc911',
       openingIn:    svc => `\u266b ${svc}\uc5d0\uc11c \uc5f4\uae30`,
@@ -203,6 +217,7 @@ if (window.__hdjLoaded) {
       noPlaylist:   '\u6b64\u60c5\u7eea\u6ca1\u6709\u8bbe\u7f6e\u64ad\u653e\u5217\u8868 \u2014 \u5728\u8bbe\u7f6e\u4e2d\u6dfb\u52a0\u4e00\u4e2a',
       close:        '\u5173\u95ed',
       starting:     '\u6b63\u5728\u542f\u52a8\u2026',
+      nowPlaying:   '\u64ad\u653e\u4e2d \u266b',
       connecting:   '\u8fde\u63a5\u4e2d\u2026',
       playingSpotify: '\u266b \u6b63\u5728 Spotify \u64ad\u653e',
       openingIn:    svc => `\u266b \u5728 ${svc} \u4e2d\u6253\u5f00`,
@@ -216,6 +231,7 @@ if (window.__hdjLoaded) {
       noPlaylist:   '\u6b64\u60c5\u7dd2\u6c92\u6709\u8a2d\u5b9a\u64ad\u653e\u6e05\u55ae \u2014 \u5728\u8a2d\u5b9a\u4e2d\u65b0\u589e\u4e00\u500b',
       close:        '\u95dc\u9589',
       starting:     '\u6b63\u5728\u555f\u52d5\u2026',
+      nowPlaying:   '\u64ad\u653e\u4e2d \u266b',
       connecting:   '\u9023\u63a5\u4e2d\u2026',
       playingSpotify: '\u266b \u6b63\u5728 Spotify \u64ad\u653e',
       openingIn:    svc => `\u266b \u5728 ${svc} \u4e2d\u958b\u555f`,
@@ -229,6 +245,7 @@ if (window.__hdjLoaded) {
       noPlaylist:   'Ez dago playlist bat aldarte honetarako \u2014 gehitu bat ezarpenetan',
       close:        'Itxi',
       starting:     'Hasten\u2026',
+      nowPlaying:   'Erreproduzitzen \u266b',
       connecting:   'Konektatzen\u2026',
       playingSpotify: '\u266b Spotifyn erreproduzitzen',
       openingIn:    svc => `\u266b ${svc}n irekitzen`,
@@ -242,6 +259,7 @@ if (window.__hdjLoaded) {
       noPlaylist:   'No hi ha cap llista de reproducci\u00f3 per a aquest estat d\u2019\u00e0nim \u2014 afegiu-ne una a la configuraci\u00f3',
       close:        'Tanca',
       starting:     'Iniciant\u2026',
+      nowPlaying:   'Reproduint \u266b',
       connecting:   'Connectant\u2026',
       playingSpotify: '\u266b Reproduint a Spotify',
       openingIn:    svc => `\u266b Obrint a ${svc}`,
@@ -333,6 +351,44 @@ if (window.__hdjLoaded) {
     if (userOverride) return userOverride;
     const svcDefaults = SERVICE_PLAYLIST_DEFAULTS[settings.musicService] || DJ_PLAYLISTS_SPOTIFY;
     return (svcDefaults[djId] || {})[mood] || '';
+  }
+
+  function buildEmbedUrl(url, service) {
+    if (!url) return null;
+    if (service === 'spotify') {
+      const m = url.match(/open\.spotify\.com\/playlist\/([A-Za-z0-9]+)/);
+      return m ? `https://open.spotify.com/embed/playlist/${m[1]}?utm_source=generator&autoplay=1` : null;
+    }
+    if (service === 'applemusic') {
+      return url.replace('https://music.apple.com', 'https://embed.music.apple.com');
+    }
+    if (service === 'youtubemusic') {
+      const m = url.match(/[?&]list=([^&]+)/);
+      return m ? `https://www.youtube.com/embed/videoseries?list=${m[1]}&autoplay=1` : null;
+    }
+    return null;
+  }
+
+  function showEmbedPlayer(panel, embedUrl, service) {
+    const existing = panel.querySelector('.hdj-embed');
+    if (existing) existing.remove();
+
+    const iframe = document.createElement('iframe');
+    iframe.className = 'hdj-embed';
+    iframe.src = embedUrl;
+    iframe.width = '100%';
+    iframe.height = '152';
+    iframe.frameBorder = '0';
+    iframe.setAttribute('loading', 'lazy');
+
+    if (service === 'applemusic') {
+      iframe.setAttribute('allow', 'autoplay *; encrypted-media *; fullscreen *; clipboard-write');
+      iframe.setAttribute('sandbox', 'allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation');
+    } else {
+      iframe.setAttribute('allow', 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture');
+    }
+
+    panel.querySelector('.hdj-body').appendChild(iframe);
   }
 
   // ── DJ PERSONALITIES ───────────────────────────────────────────────────
@@ -922,22 +978,14 @@ if (window.__hdjLoaded) {
     if (playBtn) {
       playBtn.addEventListener('click', () => {
         const uri = playBtn.dataset.uri;
-        setStatus(panel, '');
-        playBtn.textContent = getStrings().starting;
-        playBtn.disabled    = true;
-
-        const SERVICE_LABELS = { spotify: 'Spotify', applemusic: 'Apple Music', youtubemusic: 'YouTube Music' };
-        const svcLabel = SERVICE_LABELS[settings.musicService] || 'music service';
-        _api.runtime.sendMessage({ type: 'URL_PLAY', url: uri }, res => {
-          const dj = DJS[settings.dj] || DJS.lofi;
-          if (res?.ok) {
-            setStatus(panel, getStrings().openingIn(svcLabel));
-          } else {
-            setStatus(panel, res?.error || getStrings().couldNotOpen(svcLabel));
-          }
-          playBtn.textContent = dj[mood].playBtn;
-          playBtn.disabled    = false;
-        });
+        const embedUrl = buildEmbedUrl(uri, settings.musicService);
+        if (embedUrl) {
+          showEmbedPlayer(panel, embedUrl, settings.musicService);
+          playBtn.textContent = getStrings().nowPlaying;
+        } else {
+          // Fallback: open in new tab for unrecognised URL formats
+          _api.runtime.sendMessage({ type: 'URL_PLAY', url: uri });
+        }
       });
     }
 
@@ -1014,17 +1062,28 @@ if (window.__hdjLoaded) {
       // Auto-switch playlist to match new mood
       const uri = resolvePlaylist(settings.dj, mood);
       if (!uri) return; // no playlist configured for this mood/service
-      _api.runtime.sendMessage({ type: 'URL_PLAY', url: uri }, res => {
-        if (res?.ok) {
-          // Acknowledge the new mood — update button, clear ring and dot
-          lastAcknowledgedMood = mood;
-          const btn = document.getElementById('hdj-toggle');
-          if (btn) {
-            btn.setAttribute('data-mood', mood);
-            btn.style.setProperty('--hdj-ring', 'transparent');
-                }
+      const embedUrl = buildEmbedUrl(uri, settings.musicService);
+      const openPanel = document.getElementById('hdj-panel');
+      if (embedUrl && openPanel) {
+        showEmbedPlayer(openPanel, embedUrl, settings.musicService);
+        lastAcknowledgedMood = mood;
+        const btn = document.getElementById('hdj-toggle');
+        if (btn) {
+          btn.setAttribute('data-mood', mood);
+          btn.style.setProperty('--hdj-ring', 'transparent');
         }
-      });
+      } else {
+        _api.runtime.sendMessage({ type: 'URL_PLAY', url: uri }, res => {
+          if (res?.ok) {
+            lastAcknowledgedMood = mood;
+            const btn = document.getElementById('hdj-toggle');
+            if (btn) {
+              btn.setAttribute('data-mood', mood);
+              btn.style.setProperty('--hdj-ring', 'transparent');
+            }
+          }
+        });
+      }
     } else {
       updateToggleColor(mood);
     }
