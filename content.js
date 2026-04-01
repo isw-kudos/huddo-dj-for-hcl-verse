@@ -1024,7 +1024,8 @@ if (window.__hdjLoaded) {
       // Auto-switch playlist to match new mood
       const uri = resolvePlaylist(settings.dj, mood);
       if (!uri) return; // no playlist configured for this mood/service
-      _api.runtime.sendMessage({ type: 'URL_PLAY', url: uri }, res => {
+      const autoplayUri = uri + (uri.includes('?') ? '&' : '?') + 'autoplay=1';
+      _api.runtime.sendMessage({ type: 'URL_PLAY', url: autoplayUri }, res => {
         if (res?.ok) {
           lastAcknowledgedMood = mood;
           const btn = document.getElementById('hdj-toggle');

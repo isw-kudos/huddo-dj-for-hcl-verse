@@ -417,6 +417,15 @@ $('vipInput').addEventListener('keydown', e => {
 function applyServiceUI(svc) {
   const radio = document.querySelector(`input[name="musicService"][value="${svc}"]`);
   if (radio) radio.checked = true;
+
+  // Auto Change requires URL-based autoplay — not available for YouTube Music
+  const autoChangeRow = $('autoChange').closest('.toggle-row');
+  const noAutoplay = svc === 'youtubemusic';
+  if (autoChangeRow) autoChangeRow.style.display = noAutoplay ? 'none' : '';
+  if (noAutoplay && $('autoChange').checked) {
+    $('autoChange').checked = false;
+    saveAll();
+  }
 }
 
 document.querySelectorAll('input[name="musicService"]').forEach(radio => {
