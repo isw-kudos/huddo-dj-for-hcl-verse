@@ -13,39 +13,30 @@ if (window.__hdjLoaded) {
   const UI_STRINGS = {
     'en-AU': {
       toggleTitle:  'Huddo DJ for HCL Verse (Alt+D)',
-      connectHint:  'Connect Spotify to start the music',
-      connectBtn:   'Connect Spotify',
+
       noPlaylist:   'No playlist set for this mood — add one in settings',
       close:        'Close',
       starting:     'Starting\u2026',
-      connecting:   'Connecting\u2026',
-      playingSpotify: '\u266b Playing on Spotify',
       openingIn:    svc => `\u266b Opening in ${svc}`,
       couldNotOpen: svc => `Could not open ${svc} \u2014 please try again.`,
       connFailed:   'Connection failed \u2014 please try again.',
     },
     'en-GB': {
       toggleTitle:  'Huddo DJ for HCL Verse (Alt+D)',
-      connectHint:  'Connect Spotify to start the music',
-      connectBtn:   'Connect Spotify',
+
       noPlaylist:   'No playlist set for this mood \u2014 add one in settings',
       close:        'Close',
       starting:     'Starting\u2026',
-      connecting:   'Connecting\u2026',
-      playingSpotify: '\u266b Playing on Spotify',
       openingIn:    svc => `\u266b Opening in ${svc}`,
       couldNotOpen: svc => `Could not open ${svc} \u2014 please try again.`,
       connFailed:   'Connection failed \u2014 please try again.',
     },
     'en': {
       toggleTitle:  'Huddo DJ for HCL Verse (Alt+D)',
-      connectHint:  'Connect Spotify to start the music',
-      connectBtn:   'Connect Spotify',
+
       noPlaylist:   'No playlist set for this mood \u2014 add one in settings',
       close:        'Close',
       starting:     'Starting\u2026',
-      connecting:   'Connecting\u2026',
-      playingSpotify: '\u266b Playing on Spotify',
       openingIn:    svc => `\u266b Opening in ${svc}`,
       couldNotOpen: svc => `Could not open ${svc} \u2014 please try again.`,
       connFailed:   'Connection failed \u2014 please try again.',
@@ -57,8 +48,7 @@ if (window.__hdjLoaded) {
       noPlaylist:   'Keine Playlist f\u00fcr diese Stimmung \u2014 eine in den Einstellungen hinzuf\u00fcgen',
       close:        'Schlie\u00dfen',
       starting:     'Wird gestartet\u2026',
-      connecting:   'Verbinde\u2026',
-      playingSpotify: '\u266b Wird auf Spotify abgespielt',
+
       openingIn:    svc => `\u266b \u00d6ffne in ${svc}`,
       couldNotOpen: svc => `${svc} konnte nicht ge\u00f6ffnet werden \u2014 bitte erneut versuchen.`,
       connFailed:   'Verbindung fehlgeschlagen \u2014 bitte erneut versuchen.',
@@ -300,14 +290,14 @@ if (window.__hdjLoaded) {
   // ── SERVICE PLAYLIST DEFAULTS ─────────────────────────────────────────
 
   const DJ_PLAYLISTS_SPOTIFY = {
-    retro:  { zen: 'spotify:playlist:37i9dQZF1DWTx0xog3gN3q', flowing: 'spotify:playlist:37i9dQZF1DWULEW2RfoSCi', focused: 'spotify:playlist:37i9dQZF1DWWvhKV4FBciw', charged: 'spotify:playlist:37i9dQZF1DX4WgZiuR77Ef', emergency: 'spotify:playlist:37i9dQZF1DX1MUPbVKMgJE' },
-    rock:   { zen: 'spotify:playlist:37i9dQZF1DX6xOPeSOGone', flowing: 'spotify:playlist:37i9dQZF1DWXRqgorJj26U', focused: 'spotify:playlist:37i9dQZF1DXdOEFt9ZX0dh', charged: 'spotify:playlist:37i9dQZF1DX1X7WV84927n', emergency: 'spotify:playlist:37i9dQZF1DWTcqUzwhNmKv' },
-    reggae: { zen: 'spotify:playlist:37i9dQZF1DX83I5je4W4rP', flowing: 'spotify:playlist:37i9dQZF1DXbSbnqxMTGx9', focused: 'spotify:playlist:37i9dQZF1E4BF4A7UFAmeI', charged: 'spotify:playlist:37i9dQZF1DXan38dNVDdl4', emergency: 'spotify:playlist:37i9dQZF1DWW7BONj8RiqI' },
-    jazz:   { zen: 'spotify:playlist:37i9dQZF1DX4sWSpwq3LiO', flowing: 'spotify:playlist:37i9dQZF1DWVqfgj8NZEp1', focused: 'spotify:playlist:37i9dQZF1DWV7EzJMK2FUI', charged: 'spotify:playlist:37i9dQZF1EIeHZ9VTUfOrv', emergency: 'spotify:playlist:37i9dQZF1DX3rTk9UUrbYS' },
-    lofi:       { zen: 'spotify:playlist:37i9dQZF1DWZeKCadgRdKQ', flowing: 'spotify:playlist:37i9dQZF1DWWQRwui0ExPn', focused: 'spotify:playlist:37i9dQZF1DX8Uebhn9wzrS', charged: 'spotify:playlist:37i9dQZF1DWXLeA8Omikj7', emergency: 'spotify:playlist:37i9dQZF1DX76Wlfdnj7AP' },
-    hiphop:     { zen: 'spotify:playlist:37i9dQZF1DWVA1Gq4XHa6U', flowing: 'spotify:playlist:37i9dQZF1DX6GwdWRQMQpq', focused: 'spotify:playlist:37i9dQZF1DWY6tYEFs22tT', charged: 'spotify:playlist:37i9dQZF1DWY4xHQp97fN6', emergency: 'spotify:playlist:37i9dQZF1DX0XUsuxWHRQd' },
-    electronic: { zen: 'spotify:playlist:37i9dQZF1DX3Ogo9pFvBkY', flowing: 'spotify:playlist:37i9dQZF1DX4dyzvuaRJ0n', focused: 'spotify:playlist:37i9dQZF1DX32NsLKyzScr', charged: 'spotify:playlist:37i9dQZF1DX8tZsk68tuDw', emergency: 'spotify:playlist:37i9dQZF1DX6J5NfMJS675' },
-    classical:  { zen: 'spotify:playlist:37i9dQZF1DX4sWSpwq3LiO', flowing: 'spotify:playlist:37i9dQZF1DWVFeEut75IAL', focused: 'spotify:playlist:37i9dQZF1DXd5zUwdn6lPb', charged: 'spotify:playlist:37i9dQZF1DX2aCk0vzzaZQ', emergency: 'spotify:playlist:37i9dQZF1DX9G9wwzwWL2k' }
+    retro:  { zen: 'https://open.spotify.com/playlist/37i9dQZF1DWTx0xog3gN3q', flowing: 'https://open.spotify.com/playlist/37i9dQZF1DWULEW2RfoSCi', focused: 'https://open.spotify.com/playlist/37i9dQZF1DWWvhKV4FBciw', charged: 'https://open.spotify.com/playlist/37i9dQZF1DX4WgZiuR77Ef', emergency: 'https://open.spotify.com/playlist/37i9dQZF1DX1MUPbVKMgJE' },
+    rock:   { zen: 'https://open.spotify.com/playlist/37i9dQZF1DX6xOPeSOGone', flowing: 'https://open.spotify.com/playlist/37i9dQZF1DWXRqgorJj26U', focused: 'https://open.spotify.com/playlist/37i9dQZF1DXdOEFt9ZX0dh', charged: 'https://open.spotify.com/playlist/37i9dQZF1DX1X7WV84927n', emergency: 'https://open.spotify.com/playlist/37i9dQZF1DWTcqUzwhNmKv' },
+    reggae: { zen: 'https://open.spotify.com/playlist/37i9dQZF1DX83I5je4W4rP', flowing: 'https://open.spotify.com/playlist/37i9dQZF1DXbSbnqxMTGx9', focused: 'https://open.spotify.com/playlist/37i9dQZF1E4BF4A7UFAmeI', charged: 'https://open.spotify.com/playlist/37i9dQZF1DXan38dNVDdl4', emergency: 'https://open.spotify.com/playlist/37i9dQZF1DWW7BONj8RiqI' },
+    jazz:   { zen: 'https://open.spotify.com/playlist/37i9dQZF1DX4sWSpwq3LiO', flowing: 'https://open.spotify.com/playlist/37i9dQZF1DWVqfgj8NZEp1', focused: 'https://open.spotify.com/playlist/37i9dQZF1DWV7EzJMK2FUI', charged: 'https://open.spotify.com/playlist/37i9dQZF1EIeHZ9VTUfOrv', emergency: 'https://open.spotify.com/playlist/37i9dQZF1DX3rTk9UUrbYS' },
+    lofi:       { zen: 'https://open.spotify.com/playlist/37i9dQZF1DWZeKCadgRdKQ', flowing: 'https://open.spotify.com/playlist/37i9dQZF1DWWQRwui0ExPn', focused: 'https://open.spotify.com/playlist/37i9dQZF1DX8Uebhn9wzrS', charged: 'https://open.spotify.com/playlist/37i9dQZF1DWXLeA8Omikj7', emergency: 'https://open.spotify.com/playlist/37i9dQZF1DX76Wlfdnj7AP' },
+    hiphop:     { zen: 'https://open.spotify.com/playlist/37i9dQZF1DWVA1Gq4XHa6U', flowing: 'https://open.spotify.com/playlist/37i9dQZF1DX6GwdWRQMQpq', focused: 'https://open.spotify.com/playlist/37i9dQZF1DWY6tYEFs22tT', charged: 'https://open.spotify.com/playlist/37i9dQZF1DWY4xHQp97fN6', emergency: 'https://open.spotify.com/playlist/37i9dQZF1DX0XUsuxWHRQd' },
+    electronic: { zen: 'https://open.spotify.com/playlist/37i9dQZF1DX3Ogo9pFvBkY', flowing: 'https://open.spotify.com/playlist/37i9dQZF1DX4dyzvuaRJ0n', focused: 'https://open.spotify.com/playlist/37i9dQZF1DX32NsLKyzScr', charged: 'https://open.spotify.com/playlist/37i9dQZF1DX8tZsk68tuDw', emergency: 'https://open.spotify.com/playlist/37i9dQZF1DX6J5NfMJS675' },
+    classical:  { zen: 'https://open.spotify.com/playlist/37i9dQZF1DX4sWSpwq3LiO', flowing: 'https://open.spotify.com/playlist/37i9dQZF1DWVFeEut75IAL', focused: 'https://open.spotify.com/playlist/37i9dQZF1DXd5zUwdn6lPb', charged: 'https://open.spotify.com/playlist/37i9dQZF1DX2aCk0vzzaZQ', emergency: 'https://open.spotify.com/playlist/37i9dQZF1DX9G9wwzwWL2k' }
   };
 
   const DJ_PLAYLISTS_APPLEMUSIC = {
@@ -351,11 +341,11 @@ if (window.__hdjLoaded) {
     retro: {
       name: 'DJ Spinmaster', emoji: '🕺', tagline: 'Vinyl crate energy, disco soul',
       playlists: {
-        zen:       'spotify:playlist:37i9dQZF1DWTx0xog3gN3q', // Uplifting Soul Classics
-        flowing:   'spotify:playlist:37i9dQZF1DWULEW2RfoSCi', // 70s Soul Classics
-        focused:   'spotify:playlist:37i9dQZF1DWWvhKV4FBciw', // Funk & Soul Classics
-        charged:   'spotify:playlist:37i9dQZF1DX4WgZiuR77Ef', // All Funked Up
-        emergency: 'spotify:playlist:37i9dQZF1DX1MUPbVKMgJE', // Disco Forever
+        zen:       'https://open.spotify.com/playlist/37i9dQZF1DWTx0xog3gN3q', // Uplifting Soul Classics
+        flowing:   'https://open.spotify.com/playlist/37i9dQZF1DWULEW2RfoSCi', // 70s Soul Classics
+        focused:   'https://open.spotify.com/playlist/37i9dQZF1DWWvhKV4FBciw', // Funk & Soul Classics
+        charged:   'https://open.spotify.com/playlist/37i9dQZF1DX4WgZiuR77Ef', // All Funked Up
+        emergency: 'https://open.spotify.com/playlist/37i9dQZF1DX1MUPbVKMgJE', // Disco Forever
       },
       zen:       { quote: "Smooth like Sunday morning on the dance floor. The inbox is groovin'.", playBtn: 'Drop the Needle ♫', passBtn: 'Flip Side' },
       flowing:   { quote: "Nice rhythm going here — like a perfect B-side that never quit.",         playBtn: 'Drop the Needle ♫', passBtn: 'Flip Side' },
@@ -366,11 +356,11 @@ if (window.__hdjLoaded) {
     rock: {
       name: 'DJ Thunderstrike', emoji: '🤘', tagline: "High drama — everything's a guitar solo",
       playlists: {
-        zen:       'spotify:playlist:37i9dQZF1DX6xOPeSOGone', // Soft Rock
-        flowing:   'spotify:playlist:37i9dQZF1DWXRqgorJj26U', // Rock Classics
-        focused:   'spotify:playlist:37i9dQZF1DXdOEFt9ZX0dh', // Classic Rock Drive
-        charged:   'spotify:playlist:37i9dQZF1DX1X7WV84927n', // Hard Rock
-        emergency: 'spotify:playlist:37i9dQZF1DWTcqUzwhNmKv', // Kickass Metal
+        zen:       'https://open.spotify.com/playlist/37i9dQZF1DX6xOPeSOGone', // Soft Rock
+        flowing:   'https://open.spotify.com/playlist/37i9dQZF1DWXRqgorJj26U', // Rock Classics
+        focused:   'https://open.spotify.com/playlist/37i9dQZF1DXdOEFt9ZX0dh', // Classic Rock Drive
+        charged:   'https://open.spotify.com/playlist/37i9dQZF1DX1X7WV84927n', // Hard Rock
+        emergency: 'https://open.spotify.com/playlist/37i9dQZF1DWTcqUzwhNmKv', // Kickass Metal
       },
       zen:       { quote: "The inbox sleeps... like a legend between world tours. Savour it.",        playBtn: 'Crank It Up 🔊', passBtn: 'Wrong Set' },
       flowing:   { quote: "A steady beat building. The set is warming up. Don't let it fool you.",    playBtn: 'Crank It Up 🔊', passBtn: 'Wrong Set' },
@@ -381,11 +371,11 @@ if (window.__hdjLoaded) {
     reggae: {
       name: 'DJ One Love', emoji: '🌴', tagline: "Nothing's that urgent — ride the wave",
       playlists: {
-        zen:       'spotify:playlist:37i9dQZF1DX83I5je4W4rP', // Beach Vibes
-        flowing:   'spotify:playlist:37i9dQZF1DXbSbnqxMTGx9', // Reggae Classics
-        focused:   'spotify:playlist:37i9dQZF1E4BF4A7UFAmeI', // Roots Reggae Radio
-        charged:   'spotify:playlist:37i9dQZF1DXan38dNVDdl4', // Dancehall Official
-        emergency: 'spotify:playlist:37i9dQZF1DWW7BONj8RiqI', // Massive Soca Hits
+        zen:       'https://open.spotify.com/playlist/37i9dQZF1DX83I5je4W4rP', // Beach Vibes
+        flowing:   'https://open.spotify.com/playlist/37i9dQZF1DXbSbnqxMTGx9', // Reggae Classics
+        focused:   'https://open.spotify.com/playlist/37i9dQZF1E4BF4A7UFAmeI', // Roots Reggae Radio
+        charged:   'https://open.spotify.com/playlist/37i9dQZF1DXan38dNVDdl4', // Dancehall Official
+        emergency: 'https://open.spotify.com/playlist/37i9dQZF1DWW7BONj8RiqI', // Massive Soca Hits
       },
       zen:       { quote: "Every little ting gonna be alright. Inbox quiet like the beach at dawn.",                     playBtn: 'Ride the Wave 🌊', passBtn: 'Not the Vibe' },
       flowing:   { quote: "Emails coming in nice and steady. Like the tide, ya know? No rush.",                          playBtn: 'Ride the Wave 🌊', passBtn: 'Not the Vibe' },
@@ -396,11 +386,11 @@ if (window.__hdjLoaded) {
     jazz: {
       name: 'DJ Coltrane', emoji: '🎷', tagline: 'Sophisticated — reads the inbox like a chord chart',
       playlists: {
-        zen:       'spotify:playlist:37i9dQZF1DX4sWSpwq3LiO', // Peaceful Piano
-        flowing:   'spotify:playlist:37i9dQZF1DWVqfgj8NZEp1', // Coffee Table Jazz
-        focused:   'spotify:playlist:37i9dQZF1DWV7EzJMK2FUI', // Jazz in the Background
-        charged:   'spotify:playlist:37i9dQZF1EIeHZ9VTUfOrv', // Bebop Jazz Piano Mix
-        emergency: 'spotify:playlist:37i9dQZF1DX3rTk9UUrbYS', // Avant-Jazz
+        zen:       'https://open.spotify.com/playlist/37i9dQZF1DX4sWSpwq3LiO', // Peaceful Piano
+        flowing:   'https://open.spotify.com/playlist/37i9dQZF1DWVqfgj8NZEp1', // Coffee Table Jazz
+        focused:   'https://open.spotify.com/playlist/37i9dQZF1DWV7EzJMK2FUI', // Jazz in the Background
+        charged:   'https://open.spotify.com/playlist/37i9dQZF1EIeHZ9VTUfOrv', // Bebop Jazz Piano Mix
+        emergency: 'https://open.spotify.com/playlist/37i9dQZF1DX3rTk9UUrbYS', // Avant-Jazz
       },
       zen:       { quote: "A minor seventh in a quiet room. Your inbox is resting on the one.",                           playBtn: 'Take Five ♩', passBtn: 'Wrong Key' },
       flowing:   { quote: "A steady walking bass. Correspondence moves through its changes nicely.",                      playBtn: 'Take Five ♩', passBtn: 'Wrong Key' },
@@ -411,11 +401,11 @@ if (window.__hdjLoaded) {
     lofi: {
       name: 'dj study', emoji: '☕', tagline: 'minimal. lowercase. rain and coffee vibes.',
       playlists: {
-        zen:       'spotify:playlist:37i9dQZF1DWZeKCadgRdKQ', // Deep Focus
-        flowing:   'spotify:playlist:37i9dQZF1DWWQRwui0ExPn', // lofi beats
-        focused:   'spotify:playlist:37i9dQZF1DX8Uebhn9wzrS', // chill lofi study beats
-        charged:   'spotify:playlist:37i9dQZF1DWXLeA8Omikj7', // Brain Food
-        emergency: 'spotify:playlist:37i9dQZF1DX76Wlfdnj7AP', // Beast Mode
+        zen:       'https://open.spotify.com/playlist/37i9dQZF1DWZeKCadgRdKQ', // Deep Focus
+        flowing:   'https://open.spotify.com/playlist/37i9dQZF1DWWQRwui0ExPn', // lofi beats
+        focused:   'https://open.spotify.com/playlist/37i9dQZF1DX8Uebhn9wzrS', // chill lofi study beats
+        charged:   'https://open.spotify.com/playlist/37i9dQZF1DWXLeA8Omikj7', // Brain Food
+        emergency: 'https://open.spotify.com/playlist/37i9dQZF1DX76Wlfdnj7AP', // Beast Mode
       },
       zen:       { quote: 'inbox: quiet. a soft rain. you have time.',                           playBtn: 'play something', passBtn: 'nah' },
       flowing:   { quote: 'emails trickling in. manageable. kind of nice, actually.',            playBtn: 'play something', passBtn: 'nah' },
@@ -426,11 +416,11 @@ if (window.__hdjLoaded) {
     hiphop: {
       name: 'MC Overload', emoji: '🎤', tagline: "Every email's a bar. Inbox is the stage.",
       playlists: {
-        zen:       'spotify:playlist:37i9dQZF1DWVA1Gq4XHa6U', // Gold School
-        flowing:   'spotify:playlist:37i9dQZF1DX6GwdWRQMQpq', // Feelin' Myself
-        focused:   'spotify:playlist:37i9dQZF1DWY6tYEFs22tT', // Hip-Hop Central
-        charged:   'spotify:playlist:37i9dQZF1DWY4xHQp97fN6', // Get Turnt
-        emergency: 'spotify:playlist:37i9dQZF1DX0XUsuxWHRQd', // RapCaviar
+        zen:       'https://open.spotify.com/playlist/37i9dQZF1DWVA1Gq4XHa6U', // Gold School
+        flowing:   'https://open.spotify.com/playlist/37i9dQZF1DX6GwdWRQMQpq', // Feelin' Myself
+        focused:   'https://open.spotify.com/playlist/37i9dQZF1DWY6tYEFs22tT', // Hip-Hop Central
+        charged:   'https://open.spotify.com/playlist/37i9dQZF1DWY4xHQp97fN6', // Get Turnt
+        emergency: 'https://open.spotify.com/playlist/37i9dQZF1DX0XUsuxWHRQd', // RapCaviar
       },
       zen:       { quote: "Inbox clean. Ice cold. Bars on standby.",                                      playBtn: 'Drop a Beat 🎤', passBtn: 'Skip the Track' },
       flowing:   { quote: "Emails sliding in smooth. Flow state locked. Keep the 16 going.",              playBtn: 'Drop a Beat 🎤', passBtn: 'Skip the Track' },
@@ -441,11 +431,11 @@ if (window.__hdjLoaded) {
     electronic: {
       name: 'DJ Circuit', emoji: '🎛️', tagline: 'Inbox synced to the BPM. Stay in the grid.',
       playlists: {
-        zen:       'spotify:playlist:37i9dQZF1DX3Ogo9pFvBkY', // Ambient Relaxation
-        flowing:   'spotify:playlist:37i9dQZF1DX4dyzvuaRJ0n', // mint
-        focused:   'spotify:playlist:37i9dQZF1DX32NsLKyzScr', // Power Hour
-        charged:   'spotify:playlist:37i9dQZF1DX8tZsk68tuDw', // Dance Rising
-        emergency: 'spotify:playlist:37i9dQZF1DX6J5NfMJS675', // Techno Bunker
+        zen:       'https://open.spotify.com/playlist/37i9dQZF1DX3Ogo9pFvBkY', // Ambient Relaxation
+        flowing:   'https://open.spotify.com/playlist/37i9dQZF1DX4dyzvuaRJ0n', // mint
+        focused:   'https://open.spotify.com/playlist/37i9dQZF1DX32NsLKyzScr', // Power Hour
+        charged:   'https://open.spotify.com/playlist/37i9dQZF1DX8tZsk68tuDw', // Dance Rising
+        emergency: 'https://open.spotify.com/playlist/37i9dQZF1DX6J5NfMJS675', // Techno Bunker
       },
       zen:       { quote: "Signal low. BPM at rest. Breathe in sync with the grid.",                      playBtn: 'Plug In 🎛️', passBtn: 'Kill the Signal' },
       flowing:   { quote: "Data packets arriving steady. Rhythms locked. System nominal.",                 playBtn: 'Plug In 🎛️', passBtn: 'Kill the Signal' },
@@ -456,11 +446,11 @@ if (window.__hdjLoaded) {
     classical: {
       name: 'DJ Maestro', emoji: '🎼', tagline: 'The inbox is your symphony — conduct accordingly.',
       playlists: {
-        zen:       'spotify:playlist:37i9dQZF1DX4sWSpwq3LiO', // Peaceful Piano
-        flowing:   'spotify:playlist:37i9dQZF1DWVFeEut75IAL', // Calming Classical
-        focused:   'spotify:playlist:37i9dQZF1DXd5zUwdn6lPb', // Classical Focus
-        charged:   'spotify:playlist:37i9dQZF1DX2aCk0vzzaZQ', // Dramatic Classical
-        emergency: 'spotify:playlist:37i9dQZF1DX9G9wwzwWL2k', // Epic Classical
+        zen:       'https://open.spotify.com/playlist/37i9dQZF1DX4sWSpwq3LiO', // Peaceful Piano
+        flowing:   'https://open.spotify.com/playlist/37i9dQZF1DWVFeEut75IAL', // Calming Classical
+        focused:   'https://open.spotify.com/playlist/37i9dQZF1DXd5zUwdn6lPb', // Classical Focus
+        charged:   'https://open.spotify.com/playlist/37i9dQZF1DX2aCk0vzzaZQ', // Dramatic Classical
+        emergency: 'https://open.spotify.com/playlist/37i9dQZF1DX9G9wwzwWL2k', // Epic Classical
       },
       zen:       { quote: "The hall is still. A single note hangs in the air. Savour the silence.",                    playBtn: 'Raise the Baton 🎼', passBtn: 'Rest Bar' },
       flowing:   { quote: "A gentle andante. The inbox moves with purpose and grace — follow the phrase.",             playBtn: 'Raise the Baton 🎼', passBtn: 'Rest Bar' },
@@ -508,7 +498,6 @@ if (window.__hdjLoaded) {
     dj:               'lofi',
     playlists:        {},
     vipSenders:       [],
-    spotifyConnected: false,
     musicService:     'spotify',
     autoChange:       false,
     scoring:          { ...DEFAULT_SCORING },
@@ -530,13 +519,12 @@ if (window.__hdjLoaded) {
     return new Promise(resolve => {
       _api.storage.local.get(
         ['edj_verseUrl', 'edj_dj', 'edj_playlists', 'edj_vipSenders',
-         'edj_baseline', 'edj_spotifyConnected', 'edj_musicService', 'edj_autoChange', 'edj_scoring', 'edj_urgentKeywords', 'edj_language'],
+         'edj_baseline', 'edj_musicService', 'edj_autoChange', 'edj_scoring', 'edj_urgentKeywords', 'edj_language'],
         r => {
           settings.verseUrl         = r.edj_verseUrl || '';
           settings.dj               = r.edj_dj || 'lofi';
           settings.playlists        = r.edj_playlists || {};
           settings.vipSenders       = r.edj_vipSenders || [];
-          settings.spotifyConnected = r.edj_spotifyConnected || false;
           settings.musicService     = r.edj_musicService || 'spotify';
           settings.autoChange       = r.edj_autoChange || false;
           settings.scoring          = r.edj_scoring ? { ...DEFAULT_SCORING, ...r.edj_scoring } : { ...DEFAULT_SCORING };
@@ -863,22 +851,15 @@ if (window.__hdjLoaded) {
     panel.id = 'hdj-panel';
     panel.setAttribute('data-mood', mood);
 
-    const isSpotify = settings.musicService === 'spotify';
-    const needsAuth = isSpotify && !settings.spotifyConnected;
     const s = getStrings();
-    const actionsHtml = needsAuth
-      ? `<div class="hdj-connect-cta">
-           <p class="hdj-connect-hint">${esc(s.connectHint)}</p>
-           <button class="hdj-btn-connect">${esc(s.connectBtn)}</button>
+    const actionsHtml = playlistUri
+      ? `<div class="hdj-actions">
+           <button class="hdj-btn-play" data-uri="${esc(playlistUri)}">${esc(moodData.playBtn)}</button>
+           <button class="hdj-btn-pass">${esc(moodData.passBtn)}</button>
          </div>`
-      : playlistUri
-        ? `<div class="hdj-actions">
-             <button class="hdj-btn-play" data-uri="${esc(playlistUri)}">${esc(moodData.playBtn)}</button>
-             <button class="hdj-btn-pass">${esc(moodData.passBtn)}</button>
-           </div>`
-        : `<div class="hdj-connect-cta">
-             <p class="hdj-connect-hint">${esc(s.noPlaylist)}</p>
-           </div>`;
+      : `<div class="hdj-connect-cta">
+           <p class="hdj-connect-hint">${esc(s.noPlaylist)}</p>
+         </div>`;
 
     const moodBarHtml = Object.entries(MOOD_COLORS).map(([m, c]) => `
       <button class="hdj-mood-btn${m === mood ? ' active' : ''}" data-mood="${esc(m)}"
@@ -945,16 +926,12 @@ if (window.__hdjLoaded) {
         playBtn.textContent = getStrings().starting;
         playBtn.disabled    = true;
 
-        const isSpotify = settings.musicService === 'spotify';
         const SERVICE_LABELS = { spotify: 'Spotify', applemusic: 'Apple Music', youtubemusic: 'YouTube Music' };
         const svcLabel = SERVICE_LABELS[settings.musicService] || 'music service';
-        const msg = isSpotify
-          ? { type: 'SPOTIFY_PLAY', uri }
-          : { type: 'URL_PLAY', url: uri };
-        _api.runtime.sendMessage(msg, res => {
+        _api.runtime.sendMessage({ type: 'URL_PLAY', url: uri }, res => {
           const dj = DJS[settings.dj] || DJS.lofi;
           if (res?.ok) {
-            setStatus(panel, isSpotify ? getStrings().playingSpotify : getStrings().openingIn(svcLabel));
+            setStatus(panel, getStrings().openingIn(svcLabel));
           } else {
             setStatus(panel, res?.error || getStrings().couldNotOpen(svcLabel));
           }
@@ -969,23 +946,6 @@ if (window.__hdjLoaded) {
       passBtn.addEventListener('click', closePanel);
     }
 
-    const connectBtn = panel.querySelector('.hdj-btn-connect');
-    if (connectBtn) {
-      connectBtn.addEventListener('click', () => {
-        connectBtn.textContent = getStrings().connecting;
-        connectBtn.disabled    = true;
-        _api.runtime.sendMessage({ type: 'SPOTIFY_AUTH' }, res => {
-          if (res?.ok) {
-            settings.spotifyConnected = true;
-            openPanel(mood); // re-render with play button
-          } else {
-            setStatus(panel, res?.error || getStrings().connFailed);
-            connectBtn.textContent = getStrings().connectBtn;
-            connectBtn.disabled    = false;
-          }
-        });
-      });
-    }
   }
 
   function makeDraggable(panel) {
@@ -1050,14 +1010,11 @@ if (window.__hdjLoaded) {
     currentMood = mood;
     lastMoodCheckAt = Date.now();
 
-    const isSpotify      = settings.musicService === 'spotify';
-    const serviceReady   = isSpotify ? settings.spotifyConnected : true;
-    if (settings.autoChange && serviceReady && mood !== lastAcknowledgedMood) {
+    if (settings.autoChange && mood !== lastAcknowledgedMood) {
       // Auto-switch playlist to match new mood
       const uri = resolvePlaylist(settings.dj, mood);
       if (!uri) return; // no playlist configured for this mood/service
-      const msg = isSpotify ? { type: 'SPOTIFY_PLAY', uri } : { type: 'URL_PLAY', url: uri };
-      _api.runtime.sendMessage(msg, res => {
+      _api.runtime.sendMessage({ type: 'URL_PLAY', url: uri }, res => {
         if (res?.ok) {
           // Acknowledge the new mood — update button, clear ring and dot
           lastAcknowledgedMood = mood;
@@ -1142,7 +1099,7 @@ if (window.__hdjLoaded) {
 
     // React to settings changes made in the popup (without page reload)
     _api.storage.onChanged.addListener(changes => {
-      const keys = ['edj_verseUrl', 'edj_dj', 'edj_playlists', 'edj_vipSenders', 'edj_spotifyConnected', 'edj_musicService', 'edj_autoChange', 'edj_scoring', 'edj_urgentKeywords', 'edj_language'];
+      const keys = ['edj_verseUrl', 'edj_dj', 'edj_playlists', 'edj_vipSenders', 'edj_musicService', 'edj_autoChange', 'edj_scoring', 'edj_urgentKeywords', 'edj_language'];
       if (keys.some(k => k in changes)) loadSettings();
     });
   }

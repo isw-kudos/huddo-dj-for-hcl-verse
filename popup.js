@@ -19,14 +19,14 @@ const DJS = [
 // ── DJ DEFAULT PLAYLISTS (mirrors content.js DJS[id].playlists) ──────────
 
 const DJ_PLAYLISTS = {
-  retro:  { zen: 'spotify:playlist:37i9dQZF1DWTx0xog3gN3q', flowing: 'spotify:playlist:37i9dQZF1DWULEW2RfoSCi', focused: 'spotify:playlist:37i9dQZF1DWWvhKV4FBciw', charged: 'spotify:playlist:37i9dQZF1DX4WgZiuR77Ef', emergency: 'spotify:playlist:37i9dQZF1DX1MUPbVKMgJE' },
-  rock:   { zen: 'spotify:playlist:37i9dQZF1DX6xOPeSOGone', flowing: 'spotify:playlist:37i9dQZF1DWXRqgorJj26U', focused: 'spotify:playlist:37i9dQZF1DXdOEFt9ZX0dh', charged: 'spotify:playlist:37i9dQZF1DX1X7WV84927n', emergency: 'spotify:playlist:37i9dQZF1DWTcqUzwhNmKv' },
-  reggae: { zen: 'spotify:playlist:37i9dQZF1DX83I5je4W4rP', flowing: 'spotify:playlist:37i9dQZF1DXbSbnqxMTGx9', focused: 'spotify:playlist:37i9dQZF1E4BF4A7UFAmeI', charged: 'spotify:playlist:37i9dQZF1DXan38dNVDdl4', emergency: 'spotify:playlist:37i9dQZF1DWW7BONj8RiqI' },
-  jazz:   { zen: 'spotify:playlist:37i9dQZF1DX4sWSpwq3LiO', flowing: 'spotify:playlist:37i9dQZF1DWVqfgj8NZEp1', focused: 'spotify:playlist:37i9dQZF1DWV7EzJMK2FUI', charged: 'spotify:playlist:37i9dQZF1EIeHZ9VTUfOrv', emergency: 'spotify:playlist:37i9dQZF1DX3rTk9UUrbYS' },
-  lofi:       { zen: 'spotify:playlist:37i9dQZF1DWZeKCadgRdKQ', flowing: 'spotify:playlist:37i9dQZF1DWWQRwui0ExPn', focused: 'spotify:playlist:37i9dQZF1DX8Uebhn9wzrS', charged: 'spotify:playlist:37i9dQZF1DWXLeA8Omikj7', emergency: 'spotify:playlist:37i9dQZF1DX76Wlfdnj7AP' },
-  hiphop:     { zen: 'spotify:playlist:37i9dQZF1DWVA1Gq4XHa6U', flowing: 'spotify:playlist:37i9dQZF1DX6GwdWRQMQpq', focused: 'spotify:playlist:37i9dQZF1DWY6tYEFs22tT', charged: 'spotify:playlist:37i9dQZF1DWY4xHQp97fN6', emergency: 'spotify:playlist:37i9dQZF1DX0XUsuxWHRQd' },
-  electronic: { zen: 'spotify:playlist:37i9dQZF1DX3Ogo9pFvBkY', flowing: 'spotify:playlist:37i9dQZF1DX4dyzvuaRJ0n', focused: 'spotify:playlist:37i9dQZF1DX32NsLKyzScr', charged: 'spotify:playlist:37i9dQZF1DX8tZsk68tuDw', emergency: 'spotify:playlist:37i9dQZF1DX6J5NfMJS675' },
-  classical:  { zen: 'spotify:playlist:37i9dQZF1DX4sWSpwq3LiO', flowing: 'spotify:playlist:37i9dQZF1DWVFeEut75IAL', focused: 'spotify:playlist:37i9dQZF1DXd5zUwdn6lPb', charged: 'spotify:playlist:37i9dQZF1DX2aCk0vzzaZQ', emergency: 'spotify:playlist:37i9dQZF1DX9G9wwzwWL2k' }
+  retro:  { zen: 'https://open.spotify.com/playlist/37i9dQZF1DWTx0xog3gN3q', flowing: 'https://open.spotify.com/playlist/37i9dQZF1DWULEW2RfoSCi', focused: 'https://open.spotify.com/playlist/37i9dQZF1DWWvhKV4FBciw', charged: 'https://open.spotify.com/playlist/37i9dQZF1DX4WgZiuR77Ef', emergency: 'https://open.spotify.com/playlist/37i9dQZF1DX1MUPbVKMgJE' },
+  rock:   { zen: 'https://open.spotify.com/playlist/37i9dQZF1DX6xOPeSOGone', flowing: 'https://open.spotify.com/playlist/37i9dQZF1DWXRqgorJj26U', focused: 'https://open.spotify.com/playlist/37i9dQZF1DXdOEFt9ZX0dh', charged: 'https://open.spotify.com/playlist/37i9dQZF1DX1X7WV84927n', emergency: 'https://open.spotify.com/playlist/37i9dQZF1DWTcqUzwhNmKv' },
+  reggae: { zen: 'https://open.spotify.com/playlist/37i9dQZF1DX83I5je4W4rP', flowing: 'https://open.spotify.com/playlist/37i9dQZF1DXbSbnqxMTGx9', focused: 'https://open.spotify.com/playlist/37i9dQZF1E4BF4A7UFAmeI', charged: 'https://open.spotify.com/playlist/37i9dQZF1DXan38dNVDdl4', emergency: 'https://open.spotify.com/playlist/37i9dQZF1DWW7BONj8RiqI' },
+  jazz:   { zen: 'https://open.spotify.com/playlist/37i9dQZF1DX4sWSpwq3LiO', flowing: 'https://open.spotify.com/playlist/37i9dQZF1DWVqfgj8NZEp1', focused: 'https://open.spotify.com/playlist/37i9dQZF1DWV7EzJMK2FUI', charged: 'https://open.spotify.com/playlist/37i9dQZF1EIeHZ9VTUfOrv', emergency: 'https://open.spotify.com/playlist/37i9dQZF1DX3rTk9UUrbYS' },
+  lofi:       { zen: 'https://open.spotify.com/playlist/37i9dQZF1DWZeKCadgRdKQ', flowing: 'https://open.spotify.com/playlist/37i9dQZF1DWWQRwui0ExPn', focused: 'https://open.spotify.com/playlist/37i9dQZF1DX8Uebhn9wzrS', charged: 'https://open.spotify.com/playlist/37i9dQZF1DWXLeA8Omikj7', emergency: 'https://open.spotify.com/playlist/37i9dQZF1DX76Wlfdnj7AP' },
+  hiphop:     { zen: 'https://open.spotify.com/playlist/37i9dQZF1DWVA1Gq4XHa6U', flowing: 'https://open.spotify.com/playlist/37i9dQZF1DX6GwdWRQMQpq', focused: 'https://open.spotify.com/playlist/37i9dQZF1DWY6tYEFs22tT', charged: 'https://open.spotify.com/playlist/37i9dQZF1DWY4xHQp97fN6', emergency: 'https://open.spotify.com/playlist/37i9dQZF1DX0XUsuxWHRQd' },
+  electronic: { zen: 'https://open.spotify.com/playlist/37i9dQZF1DX3Ogo9pFvBkY', flowing: 'https://open.spotify.com/playlist/37i9dQZF1DX4dyzvuaRJ0n', focused: 'https://open.spotify.com/playlist/37i9dQZF1DX32NsLKyzScr', charged: 'https://open.spotify.com/playlist/37i9dQZF1DX8tZsk68tuDw', emergency: 'https://open.spotify.com/playlist/37i9dQZF1DX6J5NfMJS675' },
+  classical:  { zen: 'https://open.spotify.com/playlist/37i9dQZF1DX4sWSpwq3LiO', flowing: 'https://open.spotify.com/playlist/37i9dQZF1DWVFeEut75IAL', focused: 'https://open.spotify.com/playlist/37i9dQZF1DXd5zUwdn6lPb', charged: 'https://open.spotify.com/playlist/37i9dQZF1DX2aCk0vzzaZQ', emergency: 'https://open.spotify.com/playlist/37i9dQZF1DX9G9wwzwWL2k' }
 };
 
 const MOODS = [
@@ -178,20 +178,20 @@ const SERVICE_DEFAULT_PLAYLISTS = {
 };
 
 const SERVICE_HINTS = {
-  spotify:      'Paste a Spotify playlist URI (e.g. <em>spotify:playlist:…</em>) or leave blank for defaults.',
+  spotify:      'Paste an open.spotify.com playlist URL (e.g. <em>https://open.spotify.com/playlist/…</em>) or leave blank for defaults.',
   applemusic:   'Paste an Apple Music playlist URL (e.g. <em>https://music.apple.com/…</em>) or leave blank for defaults.',
   youtubemusic: 'Paste a YouTube Music playlist URL (e.g. <em>https://music.youtube.com/playlist?list=…</em>) or leave blank for defaults.'
 };
 
 const SERVICE_PLACEHOLDERS = {
-  spotify:      'spotify:playlist:…',
+  spotify:      'https://open.spotify.com/playlist/…',
   applemusic:   'https://music.apple.com/…',
   youtubemusic: 'https://music.youtube.com/playlist?list=…'
 };
 
 function validatePlaylistValue(value, service) {
   if (!value) return true; // empty is always valid (uses default)
-  if (service === 'spotify')      return /^spotify:playlist:[A-Za-z0-9]{22}$/.test(value);
+  if (service === 'spotify')      return /^https:\/\/open\.spotify\.com\/playlist\/[A-Za-z0-9]+$/.test(value);
   if (service === 'applemusic')   return /^https:\/\/music\.apple\.com\//.test(value);
   if (service === 'youtubemusic') return /^https:\/\/music\.youtube\.com\/playlist\?list=/.test(value);
   return true;
@@ -202,7 +202,7 @@ function validatePlaylistValue(value, service) {
 let musicService = 'spotify';
 let vipSenders = [];
 let urgentKeywords = [...URGENT_KEYWORDS_DEFAULT];
-let spotifyConnected = false;
+
 let _savedPlaylists = {}; // nested { djId: { mood: uri } } — loaded from storage
 
 // ── DOM REFS ───────────────────────────────────────────────────────────────
@@ -249,7 +249,7 @@ function renderPlaylistInputs(djId, allUserOverrides) {
   if (titleEl) titleEl.innerHTML = `${esc(dj ? dj.name : 'Custom')} Playlists <span style="font-weight:400;text-transform:none;color:#9ca3af">(optional)</span>`;
   const svcDefaults = (SERVICE_DEFAULT_PLAYLISTS[musicService] || DJ_PLAYLISTS)[djId] || {};
   const userForDJ   = (allUserOverrides || {})[djId] || {};
-  const placeholder = SERVICE_PLACEHOLDERS[musicService] || 'spotify:playlist:…';
+  const placeholder = SERVICE_PLACEHOLDERS[musicService] || 'https://open.spotify.com/playlist/…';
   $('playlistInputs').innerHTML = MOODS.map(m => `
     <div class="playlist-row">
       <span class="mood-dot" style="background:${m.color}"></span>
@@ -415,14 +415,8 @@ $('vipInput').addEventListener('keydown', e => {
 // ── MUSIC SERVICE SELECTOR ─────────────────────────────────────────────────
 
 function applyServiceUI(svc) {
-  // Check the matching radio
   const radio = document.querySelector(`input[name="musicService"][value="${svc}"]`);
   if (radio) radio.checked = true;
-  // Show/hide Spotify auth section
-  const authSection = $('spotifyAuthSection');
-  const urlHint     = $('svcUrlHint');
-  if (authSection) authSection.style.display = svc === 'spotify' ? '' : 'none';
-  if (urlHint)     urlHint.style.display     = svc !== 'spotify' ? '' : 'none';
 }
 
 document.querySelectorAll('input[name="musicService"]').forEach(radio => {
@@ -431,43 +425,6 @@ document.querySelectorAll('input[name="musicService"]').forEach(radio => {
     applyServiceUI(musicService);
     renderPlaylistInputs(getSelectedDJ(), _savedPlaylists);
     saveAll();
-  });
-});
-
-// ── SPOTIFY CONNECTION ─────────────────────────────────────────────────────
-
-function updateSpotifyUI() {
-  const nameEl = $('spotifyName');
-  const subEl  = $('spotifySub');
-  const btn    = $('btnSpotify');
-  if (spotifyConnected) {
-    nameEl.textContent = 'Connected';
-    subEl.textContent  = 'Spotify Premium · ready to play';
-    btn.textContent    = 'Disconnect';
-    btn.classList.add('danger');
-  } else {
-    nameEl.textContent = 'Not connected';
-    subEl.textContent  = 'Requires Spotify Premium';
-    btn.textContent    = 'Connect Spotify';
-    btn.classList.remove('danger');
-  }
-}
-
-$('btnSpotify').addEventListener('click', () => {
-  const btn = $('btnSpotify');
-  btn.disabled = true;
-  btn.textContent = spotifyConnected ? 'Disconnecting…' : 'Connecting…';
-
-  const type = spotifyConnected ? 'SPOTIFY_DISCONNECT' : 'SPOTIFY_AUTH';
-  _api.runtime.sendMessage({ type }, res => {
-    btn.disabled = false;
-    if (res?.ok) {
-      spotifyConnected = !spotifyConnected;
-      updateSpotifyUI();
-    } else {
-      setStatus(res?.error || 'Something went wrong — please try again.', true);
-      updateSpotifyUI();
-    }
   });
 });
 
@@ -494,7 +451,7 @@ function saveAll() {
   const playlists = getPlaylistValues();
   for (const [mood, uri] of Object.entries(playlists)) {
     if (!validatePlaylistValue(uri, musicService)) {
-      const labels = { spotify: 'a spotify:playlist:… URI', applemusic: 'a https://music.apple.com/… URL', youtubemusic: 'a https://music.youtube.com/playlist?list=… URL' };
+      const labels = { spotify: 'a https://open.spotify.com/playlist/… URL', applemusic: 'a https://music.apple.com/… URL', youtubemusic: 'a https://music.youtube.com/playlist?list=… URL' };
       setStatus(`Invalid value for ${mood} — expected ${labels[musicService] || 'a valid URL'}`, true);
       return;
     }
@@ -532,7 +489,7 @@ $('playlistInputs').addEventListener('input', debouncedSave);
 // ── LOAD ───────────────────────────────────────────────────────────────────
 
 _api.storage.local.get(
-  ['edj_verseUrl', 'edj_dj', 'edj_playlists', 'edj_musicService', 'edj_vipSenders', 'edj_spotifyConnected', 'edj_autoChange', 'edj_scoring', 'edj_urgentKeywords', 'edj_language'],
+  ['edj_verseUrl', 'edj_dj', 'edj_playlists', 'edj_musicService', 'edj_vipSenders', 'edj_autoChange', 'edj_scoring', 'edj_urgentKeywords', 'edj_language'],
   r => {
     $('verseUrl').value = r.edj_verseUrl || '';
     if (!r.edj_verseUrl) inheritVerseUrl($('verseUrl'));
@@ -547,12 +504,10 @@ _api.storage.local.get(
 
     $('autoChange').checked = r.edj_autoChange || false;
 
-    vipSenders       = r.edj_vipSenders || [];
-    spotifyConnected = r.edj_spotifyConnected || false;
-    urgentKeywords   = r.edj_urgentKeywords || [...URGENT_KEYWORDS_DEFAULT];
+    vipSenders     = r.edj_vipSenders || [];
+    urgentKeywords = r.edj_urgentKeywords || [...URGENT_KEYWORDS_DEFAULT];
     renderVIPs();
     renderKeywords();
-    updateSpotifyUI();
     loadScoringInputs(r.edj_scoring || {});
     if (r.edj_language !== undefined) $('edj_language').value = r.edj_language;
   }

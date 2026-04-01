@@ -2,19 +2,17 @@
   "manifest_version": 3,
   "name": "Huddo DJ for HCL Verse",
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApoyGI0coZ8+4J8EGSBBUc1M8A38elRaF7cQqCKGQo54mlCDIhRAnPp42BSSZPZtxsmnTn0gU78U7cMK65tkIGsWLFj0aXbBWwWSGHEtMuMKwNPlo9qaGhRD+QeJjxrpp9mZiVk5Jd8hKx+snobAccm33b7Xs0xhCRc6jIs0x2wbUehbigPuOHrNIUermOrbfFCZuJsTgMM6scO2R11nD3B1zfymrEBXodAEayn9u5Uh02BUU+RSKG7o6dpjvVXDFjybEhTf+bM1I3j3vCvmmnevZAoFd3RXGYwyA2YGs8MEqzuwvb9KQdGUEAM+GM8DR9T+LAgl4BMPrmTjVZ99FbwIDAQAB",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Plays music that matches your HCL Verse inbox mood — Spotify, Apple Music, or YouTube Music.",
   "permissions": [
     "storage",
     "activeTab",
     "scripting",
-    "tabs",
-    "identity"
+    "tabs"
   ],
   "host_permissions": [
     "https://*/*",
-    "https://accounts.spotify.com/*",
-    "https://api.spotify.com/*",
+    "https://open.spotify.com/*",
     "https://music.apple.com/*",
     "https://music.youtube.com/*"
   ],
