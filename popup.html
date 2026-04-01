@@ -152,8 +152,6 @@
       border-color: #16a34a;
       color: #fff;
     }
-    #spotifyAuthSection { margin-top: 2px; }
-
     /* ── DJ PICKER ── */
     .dj-grid {
       display: grid;
@@ -582,7 +580,7 @@
   </div>
   <div>
     <div class="hdr-title">Huddo DJ for HCL Verse</div>
-    <div class="hdr-sub">Spotify music for your inbox mood · v1.0.0</div>
+    <div class="hdr-sub">Music for your inbox mood · v1.2.0</div>
   </div>
 </header>
 
@@ -604,16 +602,7 @@
       <label class="svc-tab"><input type="radio" name="musicService" value="applemusic"> Apple Music</label>
       <label class="svc-tab"><input type="radio" name="musicService" value="youtubemusic"> YouTube Music</label>
     </div>
-    <div id="spotifyAuthSection">
-      <div class="spotify-row">
-        <div class="spotify-info">
-          <div class="spotify-name" id="spotifyName">Not connected</div>
-          <div class="spotify-sub" id="spotifySub">Requires Spotify Premium</div>
-        </div>
-        <button class="btn-spotify-connect" id="btnSpotify">Connect Spotify</button>
-      </div>
-    </div>
-    <p class="field-hint" id="svcUrlHint" style="display:none">Playlists open in a new tab — no account connection needed.</p>
+    <p class="field-hint">Playlists play inline in the Huddo DJ panel — no account connection needed.</p>
   </div>
 
   <!-- ── HOW IT WORKS ── -->
@@ -828,7 +817,7 @@
     <div id="playlistInputs">
       <!-- populated by popup.js -->
     </div>
-    <p class="field-hint" id="playlistHint">Paste a Spotify playlist URI (e.g. <em>spotify:playlist:…</em>) or leave blank for defaults.</p>
+    <p class="field-hint" id="playlistHint">Paste an open.spotify.com playlist URL or leave blank for defaults.</p>
     <div class="playlist-io-row">
       <button class="btn-io" id="btnExportPlaylists">↓ Export playlists</button>
       <button class="btn-io" id="btnImportPlaylists">↑ Import playlists</button>

@@ -207,10 +207,6 @@
   padding: 14px 16px 16px;
 }
 
-.hdj-mood-badge {
-  display: none; /* replaced by mood selector bar */
-}
-
 .hdj-quote {
   font-size: 13px;
   line-height: 1.55;
@@ -298,27 +294,6 @@
   margin: 0 0 10px;
 }
 
-.hdj-btn-connect {
-  background: #1DB954;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 9px 18px;
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background 0.15s;
-}
-
-.hdj-btn-connect:hover:not(:disabled) {
-  background: #1aa34a;
-}
-
-.hdj-btn-connect:disabled {
-  opacity: 0.6;
-  cursor: default;
-}
-
 /* ── STATUS LINE ───────────────────────────────────────────────────────── */
 
 .hdj-status {
@@ -350,3 +325,4 @@
   border-bottom: 2px solid rgba(255,255,255,0.4);
   border-radius: 0 0 3px 0;
 }
+
