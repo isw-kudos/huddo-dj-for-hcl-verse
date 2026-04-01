@@ -369,28 +369,6 @@ if (window.__hdjLoaded) {
     return null;
   }
 
-  function showEmbedPlayer(panel, embedUrl, service) {
-    const existing = panel.querySelector('.hdj-embed');
-    if (existing) existing.remove();
-
-    const iframe = document.createElement('iframe');
-    iframe.className = 'hdj-embed';
-    iframe.src = embedUrl;
-    iframe.width = '100%';
-    iframe.height = '152';
-    iframe.frameBorder = '0';
-    iframe.setAttribute('loading', 'lazy');
-
-    if (service === 'applemusic') {
-      iframe.setAttribute('allow', 'autoplay *; encrypted-media *; fullscreen *; clipboard-write');
-      iframe.setAttribute('sandbox', 'allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation');
-    } else {
-      iframe.setAttribute('allow', 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture');
-    }
-
-    panel.querySelector('.hdj-body').appendChild(iframe);
-  }
-
   // ── DJ PERSONALITIES ───────────────────────────────────────────────────
 
   const DJS = {
@@ -980,7 +958,7 @@ if (window.__hdjLoaded) {
         const uri = playBtn.dataset.uri;
         const embedUrl = buildEmbedUrl(uri, settings.musicService);
         if (embedUrl) {
-          showEmbedPlayer(panel, embedUrl, settings.musicService);
+          _api.runtime.sendMessage({ type: 'EMBED_PLAY', url: embedUrl });
           playBtn.textContent = getStrings().nowPlaying;
         } else {
           // Fallback: open in new tab for unrecognised URL formats
@@ -1063,27 +1041,18 @@ if (window.__hdjLoaded) {
       const uri = resolvePlaylist(settings.dj, mood);
       if (!uri) return; // no playlist configured for this mood/service
       const embedUrl = buildEmbedUrl(uri, settings.musicService);
-      const openPanel = document.getElementById('hdj-panel');
-      if (embedUrl && openPanel) {
-        showEmbedPlayer(openPanel, embedUrl, settings.musicService);
-        lastAcknowledgedMood = mood;
-        const btn = document.getElementById('hdj-toggle');
-        if (btn) {
-          btn.setAttribute('data-mood', mood);
-          btn.style.setProperty('--hdj-ring', 'transparent');
-        }
-      } else {
-        _api.runtime.sendMessage({ type: 'URL_PLAY', url: uri }, res => {
-          if (res?.ok) {
-            lastAcknowledgedMood = mood;
-            const btn = document.getElementById('hdj-toggle');
-            if (btn) {
-              btn.setAttribute('data-mood', mood);
-              btn.style.setProperty('--hdj-ring', 'transparent');
-            }
+      const msgType = embedUrl ? 'EMBED_PLAY' : 'URL_PLAY';
+      const msgUrl  = embedUrl || uri;
+      _api.runtime.sendMessage({ type: msgType, url: msgUrl }, res => {
+        if (res?.ok) {
+          lastAcknowledgedMood = mood;
+          const btn = document.getElementById('hdj-toggle');
+          if (btn) {
+            btn.setAttribute('data-mood', mood);
+            btn.style.setProperty('--hdj-ring', 'transparent');
           }
-        });
-      }
+        }
+      });
     } else {
       updateToggleColor(mood);
     }

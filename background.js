@@ -8,6 +8,28 @@ function openPlaylistTab(url) {
   return _api.tabs.create({ url, active: true });
 }
 
+// ── EMBED MINI-PLAYER ─────────────────────────────────────────────────────
+let embedWindowId = null;
+
+_api.windows.onRemoved.addListener(id => {
+  if (id === embedWindowId) embedWindowId = null;
+});
+
+async function openEmbedWindow(embedUrl) {
+  if (embedWindowId !== null) {
+    try { await _api.windows.remove(embedWindowId); } catch (_) {}
+    embedWindowId = null;
+  }
+  const win = await _api.windows.create({
+    url: embedUrl,
+    type: 'popup',
+    width: 400,
+    height: 200,
+    focused: false
+  });
+  embedWindowId = win.id;
+}
+
 // ── RE-INJECTION on extension reload ─────────────────────────────────────
 async function reInjectAll() {
   const { edj_verseUrl } = await new Promise(resolve =>
@@ -28,6 +50,15 @@ async function reInjectAll() {
 
 // ── MESSAGE ROUTER ────────────────────────────────────────────────────────
 _api.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
+  if (msg.type === 'EMBED_PLAY') {
+    if (!msg.url || !/^https:\/\/(open\.spotify\.com\/embed|embed\.music\.apple\.com|www\.youtube\.com\/embed)\//.test(msg.url)) {
+      sendResponse({ ok: false, error: 'Invalid embed URL' });
+      return;
+    }
+    openEmbedWindow(msg.url).then(() => sendResponse({ ok: true })).catch(e => sendResponse({ ok: false, error: e.message }));
+    return true; // async response
+  }
+
   if (msg.type === 'URL_PLAY') {
     if (!msg.url || !/^https:\/\/(music\.apple\.com|music\.youtube\.com|open\.spotify\.com)\//.test(msg.url)) {
       sendResponse({ ok: false, error: 'Invalid music service URL' });
